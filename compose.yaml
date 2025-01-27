@@ -1,0 +1,24 @@
+services:
+  playgrounds:
+    container_name: playgrounds
+    build: .
+    image: playgrounds:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    ports:
+      - 6000:6000
+    volumes:
+      - ./app:/app
+    restart: unless-stopped
+    networks:
+      - playnet
+
+networks:
+  playnet:
+    name: playnet
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.15.0.0/24
