@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, Blueprint
+from flask import render_template, request, redirect, url_for, Blueprint
 from flask_login import login_required
 from app.models.contacts_db import contacts_db
 
