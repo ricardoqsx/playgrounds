@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static',filename='star.png')}}" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos</title>
+    <!-- Bootstrap 5x-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap.min.css')}}">
+    
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css')}}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary opacity-100" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Python WebApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Contactos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('calendario', year=2024, month=1)}}">Calendario</a> <!-- IMPORTANTE, aqui solo llama la ruta, dentro del archivo index.py esta definida la ruta de la ruta-->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('login')}}">login</a>
+          </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="container-fluid">
+      {%block content%}
+      {%endblock%}
+    </div>
+</body>
+</html>

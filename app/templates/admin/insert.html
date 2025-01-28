@@ -1,0 +1,65 @@
+{%extends "layout.html"%}
+
+{%block content%}
+
+  <div class="row">
+    <div class="col-md-4">
+<!-- jumbotrom con titulos y asi -->
+<div class="bg-dark text-light py-3 px-3 box rounded-2 m-3 opacity-75" data-bs-theme="dark">
+    <h1 class="display-4 text-success">Agenda de contactos</h1>
+    <form class="d-flex" role="search"">
+        <fieldset>
+          <legend class="text-success">Busqueda!</legend>
+          <div class="mb-3">
+            <label for="TextInput" class="form-label text-success">Agregue un contacto, llene los campos a continuacion:</label>
+          </div>
+        </fieldset>
+      </form>
+  </div>
+</div>
+
+<div class="col-md-8">
+  <div class="bg-dark py-2 px-2 btn-group-lg mt-4 box rounded-2 opacity-75" data-bs-theme="dark" role="group" style="text-align:center" aria-label="Basic mixed styles example">
+    <a type="button" class="btn btn-outline-success py-1 px-1 col-3" href="{{url_for('insert')}}">Crear</a>
+    <a type="button" class="btn btn-outline-warning py-1 px-1 col-3" href="{{url_for('update')}}">Actualizar</a>
+    <a type="button" class="btn btn-outline-danger py-1 px-1 col-3" href="{{url_for('delete')}}">Eliminar</a>
+  </div>
+
+<div>
+<!-- tabla para mostrar los contactos -->
+<br>
+  <div class="bg-dark py-4 px-4 text-bg-dark rounded-2 opacity-75">
+    <form action="{{ url_for('insert') }}" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <table border="1" class="table table-striped table-dark table-hover">
+          <thead>
+              <tr>
+                  <th>Ext</th>
+                  <th>Usuario</th>
+                  <th>Correo</th>
+                  <th>Telefono</th>
+                  <th>Regional</th>
+                  <th>Departamento</th>
+                  <!-- Añade más columnas según tu tabla -->
+              </tr>
+          </thead>
+          <tbody style="text-align:left">
+                  <tr>
+                      <td><input type="text" class="form-control bg-dark text-light" name="ext" placeholder="Escribe"></td>
+                      <td><input type="text" class="form-control bg-dark text-light" name="user" placeholder="un"></td>
+                      <td><input type="text" class="form-control bg-dark text-light" name="mail" placeholder="contacto"></td>
+                      <td><input type="text" class="form-control bg-dark text-light" name="phone" placeholder="Aqui"></td>
+                      <td><input type="text" class="form-control bg-dark text-light" name="site" placeholder="mismito"></td>
+                      <td><input type="text" class="form-control bg-dark text-light" name="department" placeholder="ya!"></td>
+                      <!-- Añade más columnas según tu tabla -->
+                  </tr>
+          </tbody>
+      </table>
+   </div>
+  </div>
+  <button class="btn btn-success mt-3" type="submit">Crear Contacto</button>
+  </form>
+ </div>
+</div>
+
+{%endblock%}
