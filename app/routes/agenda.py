@@ -1,6 +1,5 @@
 from flask import render_template, request, redirect, url_for, Blueprint
-from flask_login import login_required
-from app.models.contacts_db import contacts_db
+from models.contacts_db import contacts_db
 
 agenda_bp = Blueprint('crud',__name__)
 
@@ -14,7 +13,6 @@ def index():
     return render_template('index.html', frontquery=frontquery)
 
 @agenda_bp.route('/insert', methods=['GET', 'POST'])
-@login_required
 def insert():
     if request.method == 'POST':
         # recibe datos del formulario
@@ -24,13 +22,12 @@ def insert():
         phone = request.form['phone']
         site = request.form['site']
         department = request.form['department']
-        db.create_data(ext, user, mail, phone, site, department)
+        contacts_db.create_data(ext, user, mail, phone, site, department)
         return redirect(url_for('insert'))
     frontquery=contacts_db.query()
     return render_template('admin/insert.html', frontquery=frontquery)
 
 @agenda_bp.route('/update', methods=['GET', 'POST'])
-@login_required
 def update():
     if request.method == 'POST':
         selected_exts = request.form.getlist('ext')
@@ -48,7 +45,6 @@ def update():
     return render_template('admin/update.html', frontquery=frontquery)
 
 @agenda_bp.route('/delete', methods=['GET', 'POST'])
-@login_required
 def delete():
     if request.method=='POST':
         ex=request.form.getlist('ext')
