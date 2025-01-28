@@ -1,10 +1,10 @@
 import sqlite3
 import pandas as pd
 
-contacts_db = 'contacts.db'
+contactos = 'contacts.db'
 
 def get_conn():
-    return sqlite3.connect(contacts_db)
+    return sqlite3.connect(contactos)
 
 def create_db():
     with get_conn() as con:
@@ -21,7 +21,7 @@ def create_db():
         res=cur.fetchone()
         if res is not None:
             if res[0]==0:
-                df = pd.read_csv('agenda.csv')
+                df = pd.read_csv('dbfiles/agenda.csv')
                 columns_to_insert = [ 'ext', 'user', 'mail', 'phone', 'site', 'department']
                 df.to_sql('contacts', con, if_exists='append', index=False)
 
