@@ -1,6 +1,7 @@
+from models import *
+from routes import *
 from flask import Flask
-from routes import register_blueprints
-from models.contacts_db import contacts_db
+
 
 contacts_db.create_db()
 

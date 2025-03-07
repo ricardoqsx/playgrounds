@@ -1,4 +1,4 @@
-from .agenda import agenda_bp
+from routes.agenda import *
 
 def register_blueprints(app):
     # Registrar blueprints aquí
