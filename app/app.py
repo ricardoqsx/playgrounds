@@ -1,5 +1,3 @@
-from models import *
-from routes import *
 from flask import Flask
 from routes import *
 from models import *
