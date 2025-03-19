@@ -1,40 +1,49 @@
 # playgrounds
 
 - playground repo for test characteristics about flask
-
-# Structure:
-
 - this is a sample structure for every project we made
 
+
 ```
-project/
-├── app/
-│   ├── __init__.py         # Configuración inicial de la app Flask
-│   ├── models.py           # Definición de modelos (SQLAlchemy)
-│   ├── routes/
-│   │   ├── __init__.py     # Registro de blueprints
-│   │   ├── auth.py         # Rutas relacionadas con autenticación
-│   │   ├── admin.py        # Rutas para el dashboard y administración
-│   │   ├── blog.py         # Rutas públicas para el blog
-│   │   ├── reports.py      # Rutas para el reporteador
-│   ├── templates/
-│   │   ├── auth/           # Plantillas para login/registro
-│   │   ├── admin/          # Plantillas para administración y dashboard
-│   │   ├── blog/           # Plantillas públicas del blog
-│   │   ├── reports/        # Plantillas del reporteador
-│   │   ├── base.html       # Layout principal
-│   │   ├── dashboard.html  # Layout para dashboard
-│   ├── static/             # Archivos estáticos (CSS, JS, imágenes)
-│   ├── forms.py            # Formularios WTForms
-│   ├── utils.py            # Funciones auxiliares
-│   ├── permissions.py      # Gestión de roles y permisos
-│   ├── config.py           # Configuración del proyecto
-├── migrations/             # Archivos de migraciones de base de datos
-├── tests/                  # Pruebas unitarias
-├── .env                    # Variables de entorno (credenciales, configs)
-├── requirements.txt        # Dependencias del proyecto
-├── run.py                  # Archivo principal para correr el servidor
-└── README.md               # Documentación del proyecto
+playgrounds/                                     # root of the project
+├── compose.yaml                                 # compose file to deploy the project
+├── Dockerfile                                   # docker file to create the image
+├── LICENSE
+├── README.md
+├── restart.sh                                   # tiny script for restart services
+└── src/                                         # all the app is here
+    ├── app/                                     # all the modules is inside
+    │   ├── __init__.py
+    │   ├── models/                              # database operations for call from routes
+    │   │   ├── agenda.csv
+    │   │   ├── contacts_db.py
+    │   │   └── __init__.py
+    │   ├── routes/                              # blueprints
+    │   │   ├── agenda.py
+    │   │   └── __init__.py
+    │   ├── static/                              # css and img files
+    │   │   ├── css/                             # css files
+    │   │   │   ├── bootstrap-grid.min.css
+    │   │   │   ├── bootstrap.min.css
+    │   │   │   ├── bootstrap-reboot.min.css
+    │   │   │   ├── bootstrap-utilities.min.css
+    │   │   │   └── main.css
+    │   │   └── img/                             # image files
+    │   │       └── bg6.jpg
+    │   └── templates/                           # routes where html are in
+    │       ├── admin/                           # admin files that require elevation
+    │       │   ├── delete.html
+    │       │   ├── insert.html
+    │       │   └── update.html
+    │       ├── auth/                            # login and other stuff
+    │       ├── blog/                            # templates for blog articles
+    │       ├── index.html
+    │       ├── layout.html
+    │       └── reports/                         # reports and dashboard
+    ├── requirements.txt
+    └── run.py                                   # main app
+
+16 directories, 29 files
 ```
 
 #### the thing about this repo is for make module standard code for work in other projects
