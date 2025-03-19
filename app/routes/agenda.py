@@ -1,9 +1,46 @@
 from flask import render_template, request, redirect, url_for, Blueprint
-from models.contacts_db import contacts_db
+# from models.contacts_db import contacts_db
 
-agenda_bp = Blueprint('crud',__name__)
+agenda = Blueprint('agenda',__name__, url_prefix='/admin')
 
-@agenda_bp.route('/')
+@agenda.route('/index')
+def index():
+    return render_template('index.html')
+
+@agenda.route('/insert', methods=['GET'])
+def insert():
+    return render_template('admin/insert.html')
+
+@agenda.route('/update', methods=['GET'])
+def update():
+    return render_template('admin/update.html')
+
+@agenda.route('/delete', methods=['GET'])
+def delete():
+    return render_template('admin/delete.html')
+
+
+
+
+
+
+
+
+
+"""
+@agenda.route('/delete', methods=['GET', 'POST'])
+def delete():
+    if request.method=='POST':
+        ex=request.form.getlist('ext')
+        contacts_db.delete_data(ex)
+        return redirect(url_for('delete'))
+    query = request.args.get('query','')
+    if query:
+        frontquery=contacts_db.search_data(query)
+    else:
+        frontquery=contacts_db.query()
+    return render_template('admin/delete.html', frontquery=frontquery)
+@agenda.route('/')
 def index():
     query = request.args.get('query','')
     if query:
@@ -12,7 +49,7 @@ def index():
         frontquery=contacts_db.query()
     return render_template('index.html', frontquery=frontquery)
 
-@agenda_bp.route('/insert', methods=['GET', 'POST'])
+@agenda.route('/insert', methods=['GET', 'POST'])
 def insert():
     if request.method == 'POST':
         # recibe datos del formulario
@@ -27,7 +64,7 @@ def insert():
     frontquery=contacts_db.query()
     return render_template('admin/insert.html', frontquery=frontquery)
 
-@agenda_bp.route('/update', methods=['GET', 'POST'])
+@agenda.route('/update', methods=['GET', 'POST'])
 def update():
     if request.method == 'POST':
         selected_exts = request.form.getlist('ext')
@@ -44,7 +81,7 @@ def update():
     frontquery = contacts_db.search_data(query) if query else contacts_db.query()
     return render_template('admin/update.html', frontquery=frontquery)
 
-@agenda_bp.route('/delete', methods=['GET', 'POST'])
+@agenda.route('/delete', methods=['GET', 'POST'])
 def delete():
     if request.method=='POST':
         ex=request.form.getlist('ext')
@@ -55,4 +92,6 @@ def delete():
         frontquery=contacts_db.search_data(query)
     else:
         frontquery=contacts_db.query()
-    return render_template('admin/delete.html', frontquery=frontquery)
+    return render_template('admin/delete.html', frontquery=frontquery) 
+    
+    """
