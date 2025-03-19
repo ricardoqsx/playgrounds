@@ -1,9 +1,9 @@
 FROM python:alpine
 
-WORKDIR /app
+WORKDIR /src
 
-COPY ./app .
+COPY ./src .
 
 RUN  pip install --no-cache-dir -r requirements.txt
 
-CMD ["python3", "app.py"]
+CMD ["python3", "run.py"]
