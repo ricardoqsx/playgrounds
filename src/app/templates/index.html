@@ -6,12 +6,12 @@
 <!-- jumbotrom con titulos y asi -->
 <div class="bg-dark text-light py-3 px-3 box rounded-2 m-3 opacity-75" data-bs-theme="dark">
     <h1 class="display-4">Agenda de contactos</h1>
-    <form class="d-flex" role="search" method="GET" action="/">
+    <form class="d-flex" role="search" method="GET" action="{{url_for('agenda.index')}}">
         <fieldset>
           <legend>Busqueda!</legend>
           <div class="mb-3">
             <label for="TextInput" class="form-label">Escriba un nombre para empezar a buscar:</label>
-            <input type="search" name="query" id="TextInput" class="form-control me-2" placeholder="Nombre / Apellido">
+            <input type="search" name="query" id="TextInput" class="form-control me-2" placeholder="Nombre/Apellido">
           </div>
           <button type="submit" class="btn btn-outline-primary">Buscar...</button>
         </fieldset>
