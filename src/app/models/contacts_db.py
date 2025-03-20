@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import pandas as pd
 
@@ -21,7 +22,9 @@ def create_db():
         res=cur.fetchone()
         if res is not None:
             if res[0]==0:
-                df = pd.read_csv('dbfiles/agenda.csv')
+                current_dir = os.path.dirname(__file__)
+                csv_path = os.path.join(current_dir, "agenda.csv")
+                df = pd.read_csv(csv_path)
                 columns_to_insert = [ 'ext', 'user', 'mail', 'phone', 'site', 'department']
                 df.to_sql('contacts', con, if_exists='append', index=False)
 

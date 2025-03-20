@@ -10,7 +10,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ./app:/app
+      - ./src:/src
     restart: unless-stopped
     networks:
       - playnet

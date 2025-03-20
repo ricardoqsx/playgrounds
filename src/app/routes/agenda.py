@@ -1,11 +1,18 @@
 from flask import render_template, request, redirect, url_for, Blueprint
-# from models.contacts_db import contacts_db
+from app.models.contacts_db import *
 
 agenda = Blueprint('agenda',__name__, url_prefix='/admin')
 
+create_db()
+
 @agenda.route('/index')
 def index():
-    return render_template('index.html')
+    search_query = request.args.get('query', '') 
+    if search_query:
+        frontq = search_data(search_query)
+    else:
+        frontq = query()
+    return render_template('index.html', frontq=frontq)
 
 @agenda.route('/insert', methods=['GET'])
 def insert():
@@ -40,6 +47,7 @@ def delete():
     else:
         frontquery=contacts_db.query()
     return render_template('admin/delete.html', frontquery=frontquery)
+
 @agenda.route('/')
 def index():
     query = request.args.get('query','')
