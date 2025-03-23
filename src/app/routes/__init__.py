@@ -1,1 +1,2 @@
-from .agenda import *
+from .admin_bp import *
+from .index_bp import *

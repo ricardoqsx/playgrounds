@@ -20,16 +20,16 @@
 
 <div class="col-md-8">
   <div class="bg-dark py-2 px-2 btn-group-lg mt-4 box rounded-2 opacity-75" data-bs-theme="dark" role="group" style="text-align:center" aria-label="Basic mixed styles example">
-    <a type="button" class="btn btn-outline-success py-1 px-1 col-3" href="{{url_for('agenda.insert')}}">Crear</a>
-    <a type="button" class="btn btn-outline-warning py-1 px-1 col-3" href="{{url_for('agenda.update')}}">Actualizar</a>
-    <a type="button" class="btn btn-outline-danger py-1 px-1 col-3" href="{{url_for('agenda.delete')}}">Eliminar</a>
+    <a type="button" class="btn btn-outline-success py-1 px-1 col-3" href="{{url_for('admin.insert')}}">Crear</a>
+    <a type="button" class="btn btn-outline-warning py-1 px-1 col-3" href="{{url_for('admin.update')}}">Actualizar</a>
+    <a type="button" class="btn btn-outline-danger py-1 px-1 col-3" href="{{url_for('admin.delete')}}">Eliminar</a>
   </div>
 
 <div>
 <!-- tabla para mostrar los contactos -->
 <br>
   <div class="bg-dark py-4 px-4 text-bg-dark rounded-2 opacity-75">
-    <form action="{{ url_for('agenda.insert') }}" method="POST">
+    <form action="{{ url_for('admin.insert') }}" method="POST">
       <table border="1" class="table table-striped table-dark table-hover">
           <thead>
               <tr>

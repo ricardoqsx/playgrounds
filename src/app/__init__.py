@@ -1,9 +1,9 @@
 from flask import Flask
+from app.routes import *  # Importar blueprint
 
 def create_app():
     app = Flask(__name__)
-    
     # Configuraciones (BD, blueprints, etc.)
-    from app.routes.agenda import agenda  # Importar blueprint
-    app.register_blueprint(agenda)
+    app.register_blueprint(admin)
+    app.register_blueprint(index)
     return app

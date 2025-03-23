@@ -173,3 +173,4 @@ cython_debug/
 # custom
 *.db
 agenda.csv
+.DS_Store
