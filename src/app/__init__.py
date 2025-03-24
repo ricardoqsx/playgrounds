@@ -5,5 +5,5 @@ def create_app():
     app = Flask(__name__)
     # Configuraciones (BD, blueprints, etc.)
     app.register_blueprint(admin)
-    app.register_blueprint(index)
+    app.register_blueprint(root)
     return app

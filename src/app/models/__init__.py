@@ -1,1 +1,2 @@
-from .contacts_db import *
+from .agenda_db import *
+from .blog_db import *

@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, Blueprint
-from app.models.contacts_db import *
+from app.models.agenda_db import *
 
 admin = Blueprint('admin',__name__, url_prefix='/admin')
 
