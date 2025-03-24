@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, Blueprint
 from app.models.agenda_db import query, search_data
 from app.models.blog_db import create_blog
 
-#create_blog()
+create_blog()
 
 root = Blueprint('root',__name__)
 

@@ -12,7 +12,7 @@ def create_blog():
         cur = con.cursor()
         cur.execute('''
             create table if not exists blog(
-                    id integer primary key,
+                    id integer,
                     titulo text not null,
                     categoria text not null,
                     autor text not null,
