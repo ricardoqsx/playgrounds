@@ -9,11 +9,10 @@ body
 
 
 .scrollable-table {
-    height: 350px; /* Ajusta la altura según sea necesario */
+    height: 475px; /* Ajusta la altura según sea necesario */
     overflow-y: auto; /* Habilita el scroll vertical */
     margin-top: 16px;
     border-radius: 0.5rem; /* Redondea las esquinas */
-    border: 1px solid #000000; /* Agrega un borde para que se vea mejor */
     scrollbar-width: thin; /* Para navegadores Firefox */
     scrollbar-color: transparent transparent; /* Para navegadores Firefox */
     }

@@ -25,3 +25,17 @@ def create_blog():
             df = pd.read_csv(csv_path)
             columns_to_insert = ['id','titulo','categoria','autor','historia']
             df.to_sql('blog', con, if_exists='append', index=False)
+
+def blogquery():
+    with get_conn() as con:
+        cur = con.cursor()
+        cur.execute("select id, titulo, categoria, autor from blog order by id asc")
+        total = cur.fetchall()
+    return total
+
+def search_blog(val):
+    with get_conn() as con:
+        cur = con.cursor()
+        cur.execute("select * from blog where titulo like ?",('%'+val+'%',))
+        total = cur.fetchall()
+    return total
