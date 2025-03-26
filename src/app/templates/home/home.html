@@ -7,21 +7,21 @@
         <div class="bg-dark text-light py-3 px-3 box rounded-2 opacity-75" data-bs-theme="dark">
             <h1 class="display-6">Articulos del Blog</h1>
             <hr>
-            <form class="d-flex" role="search" method="GET" action="#">
+            <form class="d-flex" role="search" method="GET" action="{{url_for('root.home')}}">
                 <fieldset>
                     <legend>Busqueda!</legend>
                     <div class="mb-3">
                         <label for="TextInput" class="form-label">Escriba un titulo para empezar a buscar:</label>
                         <input type="search" name="query" id="TextInput" class="form-control me-2" placeholder="Nombre/Apellido">
                     </div>
-                    <button type="submit" class="btn btn-outline-primary py-2 px-2 col-12">Buscar...</button>
+                    <button type="submit" class="btn btn-outline-primary py-2 px-2 col-12 mb2">Buscar...</button>
                 </fieldset>
             </form>
             <hr>
             <div class="col-md-12">
                 <h4 class="display-8 text-center">Administracion de Articulos</h4>
                 <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75" data-bs-theme="dark">
-                    <a type="button" class="btn btn-outline-success py-2 px-2 col-11 mb-2" href="#">Crear Articulo</a>
+                    <a type="button" class="btn btn-outline-success py-2 px-2 col-12 mb-2" href="#">Crear Articulo</a>
                     <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-2" href="#">Actualizar Articulo</a>
                     <a type="button" class="btn btn-outline-danger py-2 px-2 col-12 mb-2" href="#">Borrar Articulo</a>
                 </div>

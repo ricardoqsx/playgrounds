@@ -15,7 +15,7 @@ def index():
         frontq = query()
     return render_template('index.html', frontq=frontq)
 
-@root.route('/inicio')
+@root.route('/home')
 def home():
     search_query = request.args.get('query', '') 
     if search_query:
@@ -23,3 +23,10 @@ def home():
     else:
         frontblog = blogquery()
     return render_template('home/home.html', frontblog=frontblog)
+
+@root.route('/home/<int:ids>')
+def view_story(ids):
+    ids= list_ids(ids)
+    if not ids:
+        return "articulo no encontrado", 404
+    return render_template('blog/list_stories.html',ids=ids)

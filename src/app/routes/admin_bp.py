@@ -42,7 +42,7 @@ def delete():
     if request.method=='POST':
         ex=request.form.getlist('ext')
         delete_data(ex)
-        return redirect(url_for('delete'))
+        return redirect(url_for('admin.delete'))
     search_query = request.args.get('query','')
     if search_query:
         frontquery=search_data(search_query)
