@@ -7,22 +7,13 @@ create_blog()
 root = Blueprint('root',__name__)
 
 @root.route('/')
-def index():
-    search_query = request.args.get('query', '') 
-    if search_query:
-        frontq = search_data(search_query)
-    else:
-        frontq = query()
-    return render_template('index.html', frontq=frontq)
-
-@root.route('/home')
 def home():
     search_query = request.args.get('query', '') 
     if search_query:
         frontblog = search_blog(search_query)
     else:
         frontblog = blogquery()
-    return render_template('home/home.html', frontblog=frontblog)
+    return render_template('blog/home.html', frontblog=frontblog)
 
 @root.route('/home/<int:ids>')
 def view_story(ids):

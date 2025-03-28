@@ -5,6 +5,15 @@ admin = Blueprint('admin',__name__, url_prefix='/admin')
 
 create_db()
 
+@admin.route('/')
+def index():
+    search_query = request.args.get('query', '') 
+    if search_query:
+        frontq = search_data(search_query)
+    else:
+        frontq = query()
+    return render_template('admin/index.html', frontq=frontq)
+
 @admin.route('/insert', methods=['GET', 'POST'])
 def insert():
     if request.method == 'POST':
