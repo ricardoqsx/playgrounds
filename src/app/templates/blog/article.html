@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="bg-dark text-light p-5 box rounded-2 m-3 opacity-50" data-bs-theme="dark">
+    <h1 class="display-4">{{ article[0]}}</h1>
+    <p class="lead">{{ article[1] }}, {{ article[2] }}</p>
+    <hr class="my-4">
+    <p>{{ article[3] }}</p>
+    <a class="btn btn-outline-primary btn-lg" href="{{url_for('root.home')}}" role="button">Regresar</a>
+  </div>
+
+
+{% endblock %}

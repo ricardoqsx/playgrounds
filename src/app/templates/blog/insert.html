@@ -1,0 +1,52 @@
+{%extends "layout.html"%}
+
+{%block content%}
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="bg-dark text-light py-3 px-3 box rounded-2 opacity-75" data-bs-theme="dark">
+            <h1 class="display-6 text-success">Agregar un Articulo</h1>
+            <hr>
+            <div class="col-md-12">
+                <h4 class="display-8 text-center">Administracion de Articulos</h4>
+                <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75" data-bs-theme="dark">
+                    <a type="button" class="btn btn-outline-success py-2 px-2 col-12 mb-3" href="{{url_for('root.insert')}}">Crear Articulo</a>
+                    <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-3" href="#">Actualizar Articulo</a>
+                    <a type="button" class="btn btn-outline-danger py-2 px-2 col-12 mb-3" href="{{url_for('root.delete')}}">Borrar Articulo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="col-md-8 bg-dark text-light py-2 px-2 box rounded-2 opacity-75" data-bs-theme="dark">
+    <div class="card shadow p-2">
+        <h2 class="mb-2 text-success">Formulario de Publicación</h2>
+        <form>
+            <div class="mb-2">
+                <label for="titulo" class="form-label text-success">Título</label>
+                <input type="text" class="form-control text-success" id="titulo" placeholder="Escribe el título aquí" required>
+            </div>
+            <div class="mb-2 text-success">
+                <label for="categoria" class="form-label">Categoría</label>
+                <select class="form-select" id="categoria" required>
+                    <option selected disabled>Selecciona una categoría</option>
+                    <option value="1">Tecnología</option>
+                    <option value="2">Ciencia</option>
+                    <option value="3">Literatura</option>
+                    <option value="4">Historia</option>
+                </select>
+            </div>
+            <div class="mb-2">
+                <label for="autor" class="form-label text-success">Autor</label>
+                <input type="text" class="form-control" id="autor" placeholder="Nombre del autor" required>
+            </div>
+            <div class="mb-2">
+                <label for="contenido" class="form-label text-success">Contenido</label>
+                <textarea class="form-control" id="contenido" rows="5" placeholder="Escribe el contenido aquí (máx. 500 palabras)" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Enviar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

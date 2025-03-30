@@ -27,6 +27,7 @@ def create_blog():
                 columns_to_insert = ['id','titulo','categoria','autor','historia']
                 df.to_sql('blog', con, if_exists='append', index=False)
 
+# Consulta basica par mostrar la tabla
 def blogquery():
     with get_conn() as con:
         cur = con.cursor()
@@ -34,6 +35,7 @@ def blogquery():
         total = cur.fetchall()
     return total
 
+# Consulta del campo de busqueda
 def search_blog(val):
     with get_conn() as con:
         cur = con.cursor()
@@ -41,9 +43,24 @@ def search_blog(val):
         total = cur.fetchall()
     return total
 
-def list_ids(ids):
+#Consulta para la ruta dinamica
+def get_article(article_id):
     with get_conn() as con:
         cur = con.cursor()
-        cur.execute("select id from blog where id = '?', (ids,)")
-        ids = cur.fetchone()
-        return ids
+        cur.execute("SELECT titulo, categoria, autor, historia FROM blog WHERE id = ?", (article_id,))
+        article = cur.fetchone()
+        return article
+
+# Consulta para crear articulo
+def create_article(ex,us,ma,ph,st):
+    with get_conn() as con:
+        cur = con.cursor()
+        inser_data= "insert into blog (id, titulo, categoria, autor, historia) values (?, ?, ?, ?, ?)"
+        cur.execute(inser_data,(ex, us, ma, ph, st))
+
+# Consulta para borrar articulos
+def delete_article(ex):
+    with get_conn() as con:
+        cur = con.cursor()
+        for ext in ex:
+            cur.execute("delete from blog where id = ?", (ext,))
