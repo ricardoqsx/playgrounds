@@ -21,14 +21,14 @@
 <div class="col-md-8 bg-dark text-light py-2 px-2 box rounded-2 opacity-75" data-bs-theme="dark">
     <div class="card shadow p-2">
         <h2 class="mb-2 text-success">Formulario de Publicación</h2>
-        <form>
+        <form action="{{ url_for('root.insert') }}" method="POST">
             <div class="mb-2">
-                <label for="titulo" class="form-label text-success">Título</label>
-                <input type="text" class="form-control text-success" id="titulo" placeholder="Escribe el título aquí" required>
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" class="form-control" name="titulo" placeholder="Escribe el título aquí">
             </div>
-            <div class="mb-2 text-success">
+            <div class="mb-2">
                 <label for="categoria" class="form-label">Categoría</label>
-                <select class="form-select" id="categoria" required>
+                <select class="form-select" name="categoria">
                     <option selected disabled>Selecciona una categoría</option>
                     <option value="1">Tecnología</option>
                     <option value="2">Ciencia</option>
@@ -37,12 +37,12 @@
                 </select>
             </div>
             <div class="mb-2">
-                <label for="autor" class="form-label text-success">Autor</label>
-                <input type="text" class="form-control" id="autor" placeholder="Nombre del autor" required>
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" class="form-control" name="autor" placeholder="Nombre del autor">
             </div>
             <div class="mb-2">
-                <label for="contenido" class="form-label text-success">Contenido</label>
-                <textarea class="form-control" id="contenido" rows="5" placeholder="Escribe el contenido aquí (máx. 500 palabras)" required></textarea>
+                <label for="contenido" class="form-label">Contenido</label>
+                <textarea class="form-control" name="contenido" rows="5" placeholder="Escribe el contenido aquí (máx. 500 palabras)"></textarea>
             </div>
             <button type="submit" class="btn btn-success">Enviar</button>
         </form>

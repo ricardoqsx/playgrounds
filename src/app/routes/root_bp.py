@@ -26,12 +26,20 @@ def view_story(article_id):
     # Se pasa el artículo a la plantilla con el nombre 'article'
     return render_template('blog/article.html', article=article)
 
-# ==== editar articulos ===
-@root.route('/insert')
+# ==== editar articulos // listar articulos ===
+@root.route('/insert', methods=['GET','POST'])
 def insert():
+    if request.method == 'POST':
+        # recibe datos del formulario
+        titul = request.form['titulo']
+        categ = request.form['categoria']
+        autor = request.form['autor']
+        content = request.form['contenido']
+        create_article(titul, categ, autor, content)
+        return redirect(url_for('blog.insert'))
     return render_template('blog/insert.html')
 
-# ==== editar articulos ===
+# ==== editar articulos // vista ampliada ===
 @root.route('/edit')
 def edit():
     search_query = request.args.get('query', '') 

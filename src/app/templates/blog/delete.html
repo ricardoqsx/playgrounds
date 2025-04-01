@@ -3,31 +3,9 @@
 {%block content%}
 <br>
 <div class="row">
-    <div class="col-md-3">
-        <div class="bg-dark text-light py-3 px-3 box rounded-2 opacity-75" data-bs-theme="dark">
-            <h1 class="display-6 text-danger">Borrar Articulos...</h1>
-            <hr>
-            <form class="d-flex" role="search" method="GET" action="{{url_for('root.home')}}">
-                <fieldset>
-                    <legend class="text-danger">Busqueda!</legend>
-                    <div class="mb-3">
-                        <label for="TextInput" class="form-label text-danger">Escriba un titulo para empezar a buscar:</label>
-                        <input type="search" name="query" id="TextInput" class="form-control me-2" placeholder="Titulo del Articulo">
-                    </div>
-                    <button type="submit" class="btn btn-outline-primary py-2 px-2 col-12 mb3">Buscar...</button>
-                </fieldset>
-            </form>
-            <hr>
-            <div class="col-md-12">
-                <h4 class="display-8 text-center text-danger">Administracion de Articulos</h4>
-                <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75" data-bs-theme="dark">
-                    <a type="button" class="btn btn-outline-success py-2 px-2 col-12 mb-3" href="{{url_for('root.insert')}}">Crear Articulo</a>
-                    <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-3" href="{{url_for('root.edit')}}">Editar Articulo</a>
-                    <a type="button" class="btn btn-outline-danger py-2 px-2 col-12 mb-3" href="{{url_for('root.delete')}}">Borrar Articulo</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+{% include "search_panel.html" %}
+
     <div class="col-md-8 scrollable-table bg-dark py-4 px-4 text-bg-dark rounded-2 opacity-75">
         <h1 class="display-6 text-light">Listado de Articulos Existentes</h1>
         <!-- tabla para mostrar los contactos -->
