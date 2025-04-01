@@ -58,6 +58,20 @@ def create_article(ex,us,ma,ph,st):
         inser_data= "insert into blog (id, titulo, categoria, autor, historia) values (?, ?, ?, ?, ?)"
         cur.execute(inser_data,(ex, us, ma, ph, st))
 
+# Consulta para editar articulos
+def update_data(us, ma, ph, st, dp, ex):
+    with get_conn() as con:
+        cur = con.cursor()
+        upd = ''' update contacts 
+                    set user =?, 
+                    mail = ?, 
+                    phone = ?,
+                    site = ?,
+                    department = ? 
+                  where ext = ?
+              '''
+        cur.execute(upd,(us, ma, ph, st, dp, ex))
+
 # Consulta para borrar articulos
 def delete_article(ex):
     with get_conn() as con:

@@ -6,7 +6,7 @@ create_blog()
 
 root = Blueprint('root',__name__)
 
-#Inicio
+# ==== inicio ===
 @root.route('/')
 def home():
     search_query = request.args.get('query', '') 
@@ -26,7 +26,30 @@ def view_story(article_id):
     # Se pasa el artículo a la plantilla con el nombre 'article'
     return render_template('blog/article.html', article=article)
 
-# borrar articulos
+# ==== editar articulos ===
+@root.route('/insert')
+def insert():
+    return render_template('blog/insert.html')
+
+# ==== editar articulos ===
+@root.route('/edit')
+def edit():
+    search_query = request.args.get('query', '') 
+    if search_query:
+        frontblog = search_blog(search_query)
+    else:
+        frontblog = blogquery()
+    return render_template('blog/edit.html', frontblog=frontblog)
+
+# Ruta dinamica para actualizar articulos de manera individual
+@root.route('/edit/<int:article_id>')
+def edit_story(article_id):
+    article = get_article(article_id)
+    if not article:
+        return render_template('blog/404.html'), 404
+    return render_template('blog/edit_full.html', article=article)
+
+# ==== borrar articulos ===
 @root.route('/delete', methods=['GET','POST'])
 def delete():
     if request.method=='POST':
@@ -39,7 +62,3 @@ def delete():
     else:
         frontquery=blogquery()
     return render_template('blog/delete.html', frontquery=frontquery)
-
-@root.route('/insert')
-def insert():
-    return render_template('blog/insert.html')

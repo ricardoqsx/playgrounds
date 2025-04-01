@@ -5,13 +5,13 @@
 <div class="row">
     <div class="col-md-3">
         <div class="bg-dark text-light py-3 px-3 box rounded-2 opacity-75" data-bs-theme="dark">
-            <h1 class="display-6">Editar un Articulo</h1>
+            <h1 class="display-6 text-warning">Editar un Articulo</h1>
             <hr>
             <form class="d-flex" role="search" method="GET" action="{{url_for('root.home')}}">
                 <fieldset>
-                    <legend>Busqueda!</legend>
+                    <legend class="text-warning">Busqueda!</legend>
                     <div class="mb-3">
-                        <label for="TextInput" class="form-label">Escriba el titulo del articulo que quiera editar:</label>
+                        <label for="TextInput" class="form-label text-warning">Escriba el titulo del articulo que quiera editar:</label>
                         <input type="search" name="query" id="TextInput" class="form-control me-2" placeholder="Titulo del Articulo">
                     </div>
                     <button type="submit" class="btn btn-outline-primary py-2 px-2 col-12 mb3">Buscar...</button>
@@ -19,10 +19,10 @@
             </form>
             <hr>
             <div class="col-md-12">
-                <h4 class="display-8 text-center">Administracion de Articulos</h4>
+                <h4 class="display-8 text-center text-warning">Administracion de Articulos</h4>
                 <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75" data-bs-theme="dark">
                     <a type="button" class="btn btn-outline-success py-2 px-2 col-12 mb-3" href="{{url_for('root.insert')}}">Crear Articulo</a>
-                    <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-3" href="#">Actualizar Articulo</a>
+                    <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-3" href="{{url_for('root.edit')}}">Editar Articulo</a>
                     <a type="button" class="btn btn-outline-danger py-2 px-2 col-12 mb-3" href="{{url_for('root.delete')}}">Borrar Articulo</a>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         {% for row in frontblog %}
                             <tr>
                                 <td scope="row">{{ row[0] }}</td>
-                                <td scope="row"><a class="text-light" href="{{ url_for('root.view_story', article_id=row[0]) }}">{{ row[1] }}</a></td>
+                                <td scope="row"><a class="text-warning" href="{{ url_for('root.edit_story', article_id=row[0]) }}">{{ row[1] }}</a></td>
                                 <td scope="row">{{ row[2] }}</td>
                                 <td scope="row">{{ row[3] }}</td>
                             </tr>
