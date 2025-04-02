@@ -36,7 +36,7 @@ def insert():
         autor = request.form['autor']
         content = request.form['contenido']
         create_article(titul, categ, autor, content)
-        return redirect(url_for('blog.insert'))
+        return redirect(url_for('root.insert'))
     return render_template('blog/insert.html')
 
 # ==== editar articulos // vista ampliada ===
@@ -49,12 +49,20 @@ def edit():
         frontblog = blogquery()
     return render_template('blog/edit.html', frontblog=frontblog)
 
-# Ruta dinamica para actualizar articulos de manera individual
-@root.route('/edit/<int:article_id>')
+# Ruta dinamica para editar articulos de manera individual
+@root.route('/edit/<int:article_id>', methods=['GET','POST'])
 def edit_story(article_id):
     article = get_article(article_id)
     if not article:
         return render_template('blog/404.html'), 404
+    if request.method == 'POST':
+        new_id = request.form['ids']
+        new_title = request.form['titulo']
+        new_category = request.form['categoria']
+        new_autor = request.form['autor']
+        new_content = request.form['contenido']
+        update_article(new_id, new_title, new_category, new_autor, new_content)
+        return redirect(url_for('root.edit_story', article_id=article_id))
     return render_template('blog/edit_full.html', article=article)
 
 # ==== borrar articulos ===

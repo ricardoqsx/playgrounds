@@ -12,7 +12,7 @@ def create_blog():
         cur = con.cursor()
         cur.execute('''
             create table if not exists blog(
-                    id integer,
+                    id integer primary key autoincrement,
                     titulo text not null,
                     categoria text not null,
                     autor text not null,
@@ -47,30 +47,29 @@ def search_blog(val):
 def get_article(article_id):
     with get_conn() as con:
         cur = con.cursor()
-        cur.execute("SELECT titulo, categoria, autor, historia FROM blog WHERE id = ?", (article_id,))
+        cur.execute("SELECT id, titulo, categoria, autor, historia FROM blog WHERE id = ?", (article_id,))
         article = cur.fetchone()
         return article
 
 # Consulta para crear articulo
-def create_article(ex,us,ma,ph,st):
+def create_article(ex,us,ma,ph):
     with get_conn() as con:
         cur = con.cursor()
-        inser_data= "insert into blog (id, titulo, categoria, autor, historia) values (?, ?, ?, ?, ?)"
-        cur.execute(inser_data,(ex, us, ma, ph, st))
+        inser_data= "insert into blog (titulo, categoria, autor, historia) values (?, ?, ?, ?)"
+        cur.execute(inser_data,(ex, us, ma, ph))
 
 # Consulta para editar articulos
-def update_data(us, ma, ph, st, dp, ex):
+def update_article(ids, titulo, categ, aut, stor):
     with get_conn() as con:
         cur = con.cursor()
-        upd = ''' update contacts 
-                    set user =?, 
-                    mail = ?, 
-                    phone = ?,
-                    site = ?,
-                    department = ? 
-                  where ext = ?
+        upd = ''' update blog 
+                    set titulo =?, 
+                    categoria = ?, 
+                    autor = ?,
+                    historia = ?
+                  where id = ?
               '''
-        cur.execute(upd,(us, ma, ph, st, dp, ex))
+        cur.execute(upd,(titulo, categ, aut, stor, ids))
 
 # Consulta para borrar articulos
 def delete_article(ex):

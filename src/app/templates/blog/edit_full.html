@@ -1,14 +1,56 @@
-{% extends "layout.html" %}
+{%extends "layout.html"%}
 
-{% block content %}
+{%block content%}
+<br>
+<div class="row">
+    <div class="col-md-3">
+        <div class="bg-dark text-light py-3 px-3 box rounded-2 opacity-75" data-bs-theme="dark">
+            <h1 class="display-6 text-warning">Editar un Articulo</h1>
+            <hr>
+            <div class="col-md-12">
+                <h4 class="display-8 text-center">Administracion de Articulos</h4>
+                <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75" data-bs-theme="dark">
+                    <a type="button" class="btn btn-outline-success py-2 px-2 col-12 mb-3" href="{{url_for('root.insert')}}">Crear Articulo</a>
+                    <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-3" href="{{url_for('root.edit')}}">Editar Articulo</a>
+                    <a type="button" class="btn btn-outline-danger py-2 px-2 col-12 mb-3" href="{{url_for('root.delete')}}">Borrar Articulo</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="bg-dark text-light p-5 box rounded-2 m-3 opacity-50" data-bs-theme="dark">
-    <h1 class="display-4">{{ article[0]}}</h1>
-    <p class="lead">{{ article[1] }}, {{ article[2] }}</p>
-    <hr class="my-4">
-    <p>{{ article[3] }}</p>
-    <a class="btn btn-outline-primary btn-lg" href="{{url_for('root.home')}}" role="button">Regresar</a>
-  </div>
-
+<div class="col-md-8 bg-dark text-light py-2 px-2 box rounded-2 opacity-75" data-bs-theme="dark">
+    <div class="card shadow p-2">
+        <h2 class="mb-2 text-Warning">Editar esta Publicación</h2>
+        <form action="{{ url_for('root.edit_story', article_id=article[0]) }}" method="POST">
+            <div class="mb-2">
+              <label for="titulo" class="form-label text-Warning">ID</label>
+              <input type="text" class="form-control" name="ids" value="{{ article[0] }}">
+            </div>
+            <div class="mb-2">
+                <label for="titulo" class="form-label text-Warning">Título</label>
+                <input type="text" class="form-control" name="titulo" value="{{ article[1] }}">
+            </div>
+            <div class="mb-2">
+                <label for="categoria" class="form-label text-Warning">Categoría</label>
+                <select class="form-select" name="categoria" value="{{ article[2] }}">
+                    <option selected disabled class="text-Warning">Selecciona una categoría</option>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Ciencia">Ciencia</option>
+                    <option value="Literatura">Literatura</option>
+                    <option value="Historia">Historia</option>
+                </select>
+            </div>
+            <div class="mb-2">
+                <label for="autor" class="form-label text-Warning">Autor</label>
+                <input type="text" class="form-control" name="autor" value="{{ article[3] }}">
+            </div>
+            <div class="mb-2 text-Warning">
+                <label for="contenido" class="form-label text-Warning">Articulo</label>
+                <textarea class="form-control" name="contenido" rows="5">{{ article[4] }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Enviar</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
