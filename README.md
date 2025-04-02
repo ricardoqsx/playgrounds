@@ -5,47 +5,71 @@
 ## _*Estructura del proyecto*_
 
 ```
-playgrounds/                                     # raiz del proyecto
-├── compose.yaml                                 # compose para hacer el deploy
-├── Dockerfile                                   # Dockerfile para crear contenedor
-├── LICENSE
-├── README.md
-├── restart.sh                                   # script para pruebas
-└── src/                                         # todo esto es el app
-    ├── app/                                     # todos los modulos estan aqui
-    │   ├── __init__.py
-    │   ├── models/                              # operaciones de la DB para llamar desde rutas
-    │   │   ├── agenda.csv
-    │   │   ├── contacts_db.py
-    │   │   └── __init__.py
-    │   ├── routes/                              # blueprints
-    │   │   ├── admin_bp.py
-    │   │   └── __init__.py
-    │   ├── static/                              # css e imagenes
-    │   │   ├── css/                             # archivos css
-    │   │   │   ├── bootstrap-grid.min.css
-    │   │   │   ├── bootstrap.min.css
-    │   │   │   ├── bootstrap-reboot.min.css
-    │   │   │   ├── bootstrap-utilities.min.css
-    │   │   │   └── main.css
-    │   │   └── img/                             # imagenes
-    │   │       └── bg6.jpg
-    │   └── templates/                           # rutas donde estan los html
-    │       ├── admin/                           # archivos admin que requieren permisos
-    │       │   ├── delete.html
-    │       │   ├── insert.html
-    │       │   └── update.html
-    │       ├── auth/                            # login y asi
-    │       ├── blog/                            # plantillas para el blog
-    │       ├── index.html
-    │       ├── layout.html
-    │       └── reports/                         # reportes y dashboard
-    ├── requirements.txt
-    └── run.py                                   # app principal
+playgrounds/                                       # Proyecto Playgrounds, raiz
+├── compose.yaml                                   # Archivo estructural que contiene las instrucciones para deploy
+├── Dockerfile                                     # Archivo de construccion de la imagen
+├── LICENSE                                        # Licencias usadas (GPL en este caso)
+├── README.md                                      # Explicacion del proyecto
+├── restart.sh                                     # script para automatizar deploy
+└── src                                            # Toda la app esta aqui
+    ├── app                                        # Carpeta App
+    │   ├── __init__.py                            # Archivo init que modulariza app
+    │   ├── models                                 # Carpeta models
+    │   │   ├── blog.csv                           # Datos de prueba
+    │   │   ├── blog_db.py                         # Consultas a utilizar para trabajar con la BD
+    │   │   └── __init__.py                        # Archivo init que modulariza models
+    │   ├── routes                                 # Carpeta/Modulo routes
+    │   │   ├── admin_bluep.py                     # Ruta Administrativa
+    │   │   ├── home_bluep.py                      # Ruta home
+    │   │   └── __init__.py                        # Archivo init que modulariza routes
+    │   ├── static                                 # Archivos estaticos
+    │   │   ├── css                                # Utilidades de css para estilos
+    │   │   │   ├── bootstrap-grid.min.css         
+    │   │   │   ├── bootstrap.min.css              
+    │   │   │   ├── bootstrap-reboot.min.css       
+    │   │   │   ├── bootstrap-utilities.min.css    
+    │   │   │   └── main.css                       # Codigo css personalizado
+    │   │   └── img                                # Imagenes varias
+    │   │       ├── bg6.jpg
+    │   │       └── star.png
+    │   └── templates                              # Plantillas html para servir al cliente
+    │       ├── admin                              # Ruta de consultas administrativas
+    │       │   ├── 404.html                       # Vista 404 para cuando no existe un articulo, sirve esto
+    │       │   ├── article.html                   # Plantilla para articulos
+    │       │   ├── delete.html                    # Vista para el Borrado de articulos
+    │       │   ├── edit_full.html                 # Vista individual para edicion de articulos
+    │       │   ├── edit.html                      # Vista general para seleccionar cual articulo editar
+    │       │   ├── home.html                      # Vista general de articulos
+    │       │   └── insert.html                    # Vista para agregar un nuevo articulo
+    │       ├── index.html                         # Vista de inicio
+    │       ├── layout.html                        # Plantilla estructural
+    │       └── search_panel.html                  # Panel modularizado
+    ├── blog.db                                    # Base de datos del blog
+    ├── requirements.txt                           # Requerimientos python necesarios para el proyecto
+    └── run.py                                     # Archivo que inicia la aplicacion
 
-16 directorios, 29 archivos
+9 directories, 32 files
 ```
 ---
+
+## Explicacion Step by Step
+
+El deploy inicia con el archivo compose, el cual al ejecutarse, inicia la construccion de la imagen mediante el Dockerfile y designa los parametros de como se ejecutara ese contenedor, en el dockerfile instala todas las dependencias en el servidor para que el app pueda correr sin inconvenientes. a partir de que el app esta funcionando, hay un volumen creado el cual actua como enlace entre los archivos fuente, y el contenedor.
+
+A partir de aqui actuan los archivos .py que son la escencia de la aplicacion. la estructura basica seria asi:
+
+- run.py crea la aplicacion y la despliega
+- /app/__init__.py convierte en modulo todo lo que existe dentro de app (models, routes)
+- /app/models/__init__.py convierte en modulo esta carpeta para disponer de las funciones de blog_db.py
+- /app/models/blog_db.py contiene las operaciones a realizar en la base de datos
+- /app/routes/__init__.py convierte en modulo esta carpeta para administrar las rutas con blueprints
+- /app/routes/admin_bluep.py contiene las rutas que se usaran en el modulo de administracion
+- /app/routes/home_bluep.py aqui estan las rutas de index y en general la vista de los usuarios
+
+Adicional, tenemos distintas carpetas que sirven archivos estaticos para que al recibir peticiones, el servidor sirva
+
+- /app/static contiene archivos css e imagenes para el estilizado
+- /app/templates contiene los distintos archivos html, tanto plantillas como vistas
 
 #### the thing about this repo is for make module standard code for work in other projects
 
