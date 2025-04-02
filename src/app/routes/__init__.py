@@ -1,2 +1,2 @@
-from .admin_bp import *
-from .root_bp import *
+from .admin_bluep import *
+from .home_bluep import *

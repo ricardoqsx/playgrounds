@@ -2,7 +2,7 @@ import os
 import sqlite3
 import pandas as pd
 
-blog = 'contacts.db'
+blog = 'blog.db'
 
 def get_conn():
     return sqlite3.connect(blog)
