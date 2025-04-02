@@ -5,48 +5,48 @@
 ## _*Estructura del proyecto*_
 
 ```
-playgrounds/                                       # Proyecto Playgrounds, raiz
-├── compose.yaml                                   # Archivo estructural que contiene las instrucciones para deploy
-├── Dockerfile                                     # Archivo de construccion de la imagen
-├── LICENSE                                        # Licencias usadas (GPL en este caso)
-├── README.md                                      # Explicacion del proyecto
-├── restart.sh                                     # script para automatizar deploy
-└── src                                            # Toda la app esta aqui
-    ├── app                                        # Carpeta App
-    │   ├── __init__.py                            # Archivo init que modulariza app
-    │   ├── models                                 # Carpeta models
-    │   │   ├── blog.csv                           # Datos de prueba
-    │   │   ├── blog_db.py                         # Consultas a utilizar para trabajar con la BD
-    │   │   └── __init__.py                        # Archivo init que modulariza models
-    │   ├── routes                                 # Carpeta/Modulo routes
-    │   │   ├── admin_bluep.py                     # Ruta Administrativa
-    │   │   ├── home_bluep.py                      # Ruta home
-    │   │   └── __init__.py                        # Archivo init que modulariza routes
-    │   ├── static                                 # Archivos estaticos
-    │   │   ├── css                                # Utilidades de css para estilos
+playgrounds/                        # Proyecto Playgrounds, raiz
+├── compose.yaml                    # Archivo estructural que contiene las instrucciones para deploy
+├── Dockerfile                      # Archivo de construccion de la imagen
+├── LICENSE                         # Licencias usadas (GPL en este caso)
+├── README.md                       # Explicacion del proyecto
+├── restart.sh                      # script para automatizar deploy
+└── src                             # Toda la app esta aqui
+    ├── app                         # Carpeta App
+    │   ├── __init__.py             # Archivo init que modulariza app
+    │   ├── models                  # Carpeta models
+    │   │   ├── blog.csv            # Datos de prueba
+    │   │   ├── blog_db.py          # Consultas a utilizar para trabajar con la BD
+    │   │   └── __init__.py         # Archivo init que modulariza models
+    │   ├── routes                  # Carpeta/Modulo routes
+    │   │   ├── admin_bluep.py      # Ruta Administrativa
+    │   │   ├── home_bluep.py       # Ruta home
+    │   │   └── __init__.py         # Archivo init que modulariza routes
+    │   ├── static                  # Archivos estaticos
+    │   │   ├── css                 # Utilidades de css para estilos
     │   │   │   ├── bootstrap-grid.min.css         
     │   │   │   ├── bootstrap.min.css              
     │   │   │   ├── bootstrap-reboot.min.css       
     │   │   │   ├── bootstrap-utilities.min.css    
-    │   │   │   └── main.css                       # Codigo css personalizado
-    │   │   └── img                                # Imagenes varias
+    │   │   │   └── main.css        # Codigo css personalizado
+    │   │   └── img                 # Imagenes varias
     │   │       ├── bg6.jpg
     │   │       └── star.png
-    │   └── templates                              # Plantillas html para servir al cliente
-    │       ├── admin                              # Ruta de consultas administrativas
-    │       │   ├── 404.html                       # Vista 404 para cuando no existe un articulo, sirve esto
-    │       │   ├── article.html                   # Plantilla para articulos
-    │       │   ├── delete.html                    # Vista para el Borrado de articulos
-    │       │   ├── edit_full.html                 # Vista individual para edicion de articulos
-    │       │   ├── edit.html                      # Vista general para seleccionar cual articulo editar
-    │       │   ├── home.html                      # Vista general de articulos
-    │       │   └── insert.html                    # Vista para agregar un nuevo articulo
-    │       ├── index.html                         # Vista de inicio
-    │       ├── layout.html                        # Plantilla estructural
-    │       └── search_panel.html                  # Panel modularizado
-    ├── blog.db                                    # Base de datos del blog
-    ├── requirements.txt                           # Requerimientos python necesarios para el proyecto
-    └── run.py                                     # Archivo que inicia la aplicacion
+    │   └── templates               # Plantillas html para servir al cliente
+    │       ├── admin               # Ruta de consultas administrativas
+    │       │   ├── 404.html        # Vista 404 para cuando no existe un articulo, sirve esto
+    │       │   ├── article.html    # Plantilla para articulos
+    │       │   ├── delete.html     # Vista para el Borrado de articulos
+    │       │   ├── edit_full.html  # Vista individual para edicion de articulos
+    │       │   ├── edit.html       # Vista general para seleccionar cual articulo editar
+    │       │   ├── home.html       # Vista general de articulos
+    │       │   └── insert.html     # Vista para agregar un nuevo articulo
+    │       ├── index.html          # Vista de inicio
+    │       ├── layout.html         # Plantilla estructural
+    │       └── search_panel.html   # Panel modularizado
+    ├── blog.db                     # Base de datos del blog
+    ├── requirements.txt            # Requerimientos python necesarios para el proyecto
+    └── run.py                      # Archivo que inicia la aplicacion
 
 9 directories, 32 files
 ```
