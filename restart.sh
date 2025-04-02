@@ -2,6 +2,6 @@
 
 docker compose down
 docker rmi playgrounds
-rm -f src/contacts.db
+rm -f src/blog.db
 docker compose up -d
 docker compose logs -f
