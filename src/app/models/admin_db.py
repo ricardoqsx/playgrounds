@@ -49,7 +49,7 @@ def get_article(article_id):
         cur = con.cursor()
         cur.execute("SELECT id, titulo, categoria, autor, historia FROM blog WHERE id = ?", (article_id,))
         article = cur.fetchone()
-        return article
+    return article
 
 # Consulta para crear articulo
 def create_article(ex,us,ma,ph):

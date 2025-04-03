@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, Blueprint
-from app.models.blog_db import *
+from app.models.admin_db import *
 
 create_blog()
 
