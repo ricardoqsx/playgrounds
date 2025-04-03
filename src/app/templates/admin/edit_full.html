@@ -24,7 +24,7 @@
         <form action="{{ url_for('admin.edit_story', article_id=article[0]) }}" method="POST">
             <div class="mb-2">
               <label for="titulo" class="form-label text-Warning">ID</label>
-              <input type="text" class="form-control" name="ids" value="{{ article[0] }}">
+              <input type="text" class="form-control" name="ids" value="{{ article[0] }}" readonly>
             </div>
             <div class="mb-2">
                 <label for="titulo" class="form-label text-Warning">Título</label>
