@@ -1,19 +1,11 @@
 import sqlite3
 
+# establece la conexion
 blog = 'blog.db'
-
 def gcon():
     return sqlite3.connect(blog)
 
-# Estructura // Para recordar
-# nombre_bd = blog
-# columnas = id integer primary key autoincrement
-#            titulo text not null
-#            categoria text not null
-#            autor text not null
-#            historia text not null
-
-
+# Consulta para hacer la presentacion de los articulos en el index
 def posts():
     with gcon() as con:
         cur = con.cursor()
