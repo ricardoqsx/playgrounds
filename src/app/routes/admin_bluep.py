@@ -15,6 +15,10 @@ def home():
         frontblog = blogquery()
     return render_template('admin/home.html', frontblog=frontblog)
 
+@admin.route('/login')
+def login():
+    return render_template('admin/login.html')
+
 # Ruta dinamica para visualizar articulos
 @admin.route('/<int:article_id>')
 def view_story(article_id):

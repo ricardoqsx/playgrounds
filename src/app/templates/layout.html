@@ -5,7 +5,7 @@
     <link rel="icon" href="{{ url_for('static',filename='img/star.png')}}" type="image/png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playgrounds Blog!</title>
+    <title>Playgrounds</title>
     <!-- Bootstrap 5x-->
     <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
     
@@ -22,9 +22,10 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('admin.home')}}">Operaciones</a>
+            <a class="nav-link active" aria-current="page" href="{{ url_for('admin.login')}}">Acceso</a>
           </li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ url_for('admin.home')}}">Operaciones</a>
           </li>
         </ul>
       </div>
