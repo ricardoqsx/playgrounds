@@ -20,7 +20,7 @@
 
 <div class="col-md-8 bg-dark text-light py-2 px-2 box rounded-2 opacity-75" data-bs-theme="dark">
     <div class="card shadow p-2">
-        <h2 class="mb-2 text-success">Formulario de Publicación</h2>
+        <h2 class="mb-2 text-success">Agregar un articulo...</h2>
         <form action="{{ url_for('admin.insert') }}" method="POST">
             <div class="mb-2">
                 <label for="titulo" class="form-label">Título</label>
@@ -44,7 +44,8 @@
                 <label for="contenido" class="form-label">Contenido</label>
                 <textarea class="form-control" name="contenido" rows="5" placeholder="Escribe el contenido aquí (máx. 500 palabras)"></textarea>
             </div>
-            <button type="submit" class="btn btn-success">Enviar</button>
+            <br>
+            <button type="submit" class="btn btn-success">Agregar</button>
         </form>
     </div>
 </div>
