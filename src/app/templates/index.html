@@ -2,6 +2,9 @@
 
 {% block content %}
 
+<h1 class="display-6 text-center text-light">Ultimos articulos redactados en el blog</h1>
+<br>
+
 {% for row in cons %}
 <div class="row justify-content-center">
   <div class="col-md-8 justify-content-center">
@@ -14,5 +17,7 @@
 </div>
 <br>
 {% endfor %}
+
+{% include "blog/pawg.html" %}
 
 {% endblock %}

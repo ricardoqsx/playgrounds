@@ -2,13 +2,18 @@
 
 {% block content %}
 
-<div class="bg-dark text-light p-5 box rounded-2 m-3 opacity-50" data-bs-theme="dark">
-    <h1 class="display-4">{{ article[1]}}</h1>
+<h1 class="display-4 text-light m-5">{{ article[1]}}</h1>
+
+<div class="bg-dark text-light p-5 box rounded-2 m-5 opacity-50" data-bs-theme="dark">
     <p class="lead">{{ article[2] }}, {{ article[3] }}</p>
     <hr class="my-4">
     <p>{{ article[4] }}</p>
     <a class="btn btn-outline-primary btn-lg" href="{{url_for('home.index')}}" role="button">Regresar</a>
   </div>
+
+  <br>
+
+  {% include "blog/comment.html" %}
 
 
 {% endblock %}
