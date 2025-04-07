@@ -75,7 +75,7 @@ Adicional, tenemos distintas carpetas que sirven archivos estaticos para que al 
 
 ## _*Razones para Usar Python, MySQL y Docker en la Creación de Aplicaciones*_
 
-Al momento de desarrollar aplicaciones como una agenda o un CMS basado en Flask, es crucial elegir las tecnologías que mejor se adapten a las necesidades del proyecto. A continuación, se detallan los beneficios de usar Python, MySQL y Docker en este contexto:
+Al momento de desarrollar aplicaciones como una agenda o un CMS basado en Flask, es crucial elegir las tecnologías que mejor se adapten a las necesidades del proyecto. A continuación, se detallan los beneficios de usar Python, una base de datos (como MySQL o SQLite) y Docker en este contexto:
 
 ---
 
@@ -139,4 +139,4 @@ Al momento de desarrollar aplicaciones como una agenda o un CMS basado en Flask,
 ---
 
 ### _*Conclusión*_
-Al combinar Python, MySQL y Docker, obtienes un ecosistema potente y eficiente para desarrollar aplicaciones modernas. Python proporciona una base sólida y flexible, MySQL asegura la gestión confiable de datos, y Docker simplifica la implementación y escalabilidad. Esta combinación no solo optimiza el proceso de desarrollo, sino que también asegura que las aplicaciones sean portables, escalables y fáciles de mantener.
+Al combinar Python, una base de datos (como MySQL, SQLite o MariaDB) y Docker, obtienes un ecosistema potente y eficiente para desarrollar aplicaciones modernas. Python proporciona una base sólida y flexible, MySQL asegura la gestión confiable de datos, y Docker simplifica la implementación y escalabilidad. Esta combinación no solo optimiza el proceso de desarrollo, sino que también asegura que las aplicaciones sean portables, escalables y fáciles de mantener.
