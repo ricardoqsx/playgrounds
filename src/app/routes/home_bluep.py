@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for, Blueprint
 from math import ceil
+import markdown
 from app.models.queries_db import *
 
 home = Blueprint('home',__name__)
@@ -30,7 +31,8 @@ def index():
 def read_story(article_id):
     # Obtenemos los datos del artículo
     article = read_article(article_id)
+    md = markdown.markdown(article[4])
     if not article:
         return render_template('blog/404.html'), 404
     # Se pasa el artículo a la plantilla con el nombre 'article'
-    return render_template('blog/article.html', article=article)
+    return render_template('blog/article.html', article=article, md=md)
