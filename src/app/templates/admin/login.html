@@ -8,29 +8,42 @@
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="#" method="POST">                        <!-- begin form-->
+                <form action="{{ url_for('admin.login')}}" method="POST">                        <!-- begin form-->
                     <h2>Admin Access</h2>
+                    {% with messages = get_flashed_messages() %}
+
+                    {% if messages %}
+                    <br />
+                    {% for message in messages %}
+                    <div class="alert alert-primary alert-dismissible" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                
+                    {% endwith %}
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" name="user" required>
+                        <input type="text" name="username" required>
                         <label for="">User</label>
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" name="pass" required>
+                        <input type="password" name="password" required>
                         <label for="">Password</label>
                     </div>
                     <div class="forget">
                         <label for=""><input type="checkbox">Recuerdame |  <a href="#">Olvide mi Contraseña</a></label>
 
                     </div>
-                    <button>Log in</button>
+                    <button type="submit">Log in</button>
+                </form>
                     <div class="register">
                         <p>No tienes cuenta? -> <a href="#">Registrate</a></p>
                     <br>
                     <button class="boton"> <a href="/">Back</a></button>
                     </div>
-                </form>
             </div>
         </div>
     </section>
