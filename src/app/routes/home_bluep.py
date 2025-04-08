@@ -19,11 +19,13 @@ def index():
     
     # Obtenemos los posts de la página actual
     articulos = posts(pagina, por_pagina)
+    # md = markdown.markdown(articulos[2])
     
     return render_template(
         'index.html',
         cons=articulos,
         pagina_actual=pagina,
+        # md = md,
         total_paginas=total_paginas)
 
 # Ruta dinamica para visualizar articulos
@@ -31,7 +33,7 @@ def index():
 def read_story(article_id):
     # Obtenemos los datos del artículo
     article = read_article(article_id)
-    md = markdown.markdown(article[4])
+    md = markdown.markdown(article[4], extensions=['tables', 'fenced_code'])
     if not article:
         return render_template('blog/404.html'), 404
     # Se pasa el artículo a la plantilla con el nombre 'article'
