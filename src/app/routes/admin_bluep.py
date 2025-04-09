@@ -1,19 +1,40 @@
 from flask import render_template, request, redirect, url_for, Blueprint, flash
 from app.models.admin_db import *
 from app.models.users import *
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required
 
 create_blog()
 create_users()
 
 admin = Blueprint('admin',__name__, url_prefix='/admin')
 
-#@login_manager_app.user_loader
-#def load_user(id):
-#    return ModelUser.get_by_id(id)
+@admin.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
+        if not username or not password:
+            flash("Completa todos los campos")
+            return render_template('admin/login.html')
+        
+        # Buscar usuario en BD
+        logged_user = ModelUser.login(username, password)
+        if logged_user:
+            login_user(logged_user)
+            return redirect(url_for('admin.home'))
+        else:
+            flash("Usuario o contraseña incorrectos")
+            return render_template('admin/login.html')
+    return render_template('admin/login.html')
+    
+@admin.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('admin.login'))
 
 # ==== inicio ===
 @admin.route('/')
+@login_required
 def home():
     search_query = request.args.get('query', '') 
     if search_query:
@@ -22,26 +43,9 @@ def home():
         frontblog = blogquery()
     return render_template('admin/home.html', frontblog=frontblog)
 
-@admin.route('/login', methods=['GET','POST'])
-def login():
-    if request.method == 'POST':
-        user = User(0,request.form['username'],request.form['password'])
-        logged_user = ModelUser.login(user)
-        if logged_user != None:
-            if logged_user.password:
-                return redirect(url_for('admin.home'))
-            else:
-                flash("Contraseña Invalida...")
-                return render_template('admin/login.html')
-        else:
-            flash("Usuario no encontrado...")
-            return render_template('admin/login.html')
-    else:
-        return render_template('admin/login.html')
-
 # Ruta dinamica para visualizar articulos
 @admin.route('/<int:article_id>')
-#@login_required
+@login_required
 def view_story(article_id):
     # Obtenemos los datos del artículo
     article = get_article(article_id)
@@ -52,7 +56,7 @@ def view_story(article_id):
 
 # ==== editar articulos // listar articulos ===
 @admin.route('/insert', methods=['GET','POST'])
-#@login_required
+@login_required
 def insert():
     if request.method == 'POST':
         # recibe datos del formulario
@@ -66,7 +70,7 @@ def insert():
 
 # ==== editar articulos // vista ampliada ===
 @admin.route('/edit')
-#@login_required
+@login_required
 def edit():
     search_query = request.args.get('query', '') 
     if search_query:
@@ -77,7 +81,7 @@ def edit():
 
 # Ruta dinamica para editar articulos de manera individual
 @admin.route('/edit/<int:article_id>', methods=['GET','POST'])
-#@login_required
+@login_required
 def edit_story(article_id):
     article = get_article(article_id)
     if not article:
@@ -94,7 +98,7 @@ def edit_story(article_id):
 
 # ==== borrar articulos ===
 @admin.route('/delete', methods=['GET','POST'])
-#@login_required
+@login_required
 def delete():
     if request.method=='POST':
         ex=request.form.getlist('ext')

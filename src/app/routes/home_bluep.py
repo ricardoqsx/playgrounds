@@ -38,3 +38,9 @@ def read_story(article_id):
         return render_template('blog/404.html'), 404
     # Se pasa el artículo a la plantilla con el nombre 'article'
     return render_template('blog/article.html', article=article, md=md)
+
+def status_404(error):
+    return render_template('admin/404.html'), 404
+
+def status_401(error):
+    return render_template('admin/401.html'), 401

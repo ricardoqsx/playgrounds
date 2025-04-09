@@ -9,16 +9,17 @@
                     <label for="TextInput" class="form-label">Escriba un titulo para empezar a buscar:</label>
                     <input type="search" name="query" id="TextInput" class="form-control me-2" placeholder="Titulo del Articulo">
                 </div>
-                <button type="submit" class="btn btn-outline-primary py-2 px-2 col-12 mb3">Buscar...</button>
+                <button type="submit" class="btn btn-outline-primary py-1 px-2 col-12 mb2">Buscar...</button>
             </fieldset>
         </form>
         <hr>
         <div>
             <h4 class="display-8 text-center">Administracion de Articulos</h4>
             <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75" data-bs-theme="dark">
-                <a type="button" class="btn btn-outline-success py-2 px-2 col-12 mb-3" href="{{url_for('admin.insert')}}">Crear Articulo</a>
-                <a type="button" class="btn btn-outline-warning py-2 px-2 col-12 mb-3" href="{{url_for('admin.edit')}}">Actualizar Articulo</a>
-                <a type="button" class="btn btn-outline-danger py-2 px-2 col-12 mb-3" href="{{url_for('admin.delete')}}">Borrar Articulo</a>
+                <a type="button" class="btn btn-outline-success py-1 px-2 col-12 mb-2" href="{{url_for('admin.insert')}}">Crear Articulo</a>
+                <a type="button" class="btn btn-outline-warning py-1 px-2 col-12 mb-2" href="{{url_for('admin.edit')}}">Actualizar Articulo</a>
+                <a type="button" class="btn btn-outline-danger py-1 px-2 col-12 mb-2" href="{{url_for('admin.delete')}}">Borrar Articulo</a>
+                <a type="button" class="btn btn-outline-secondary py-1 px-2 col-12 mb-2" href="{{url_for('admin.logout')}}">Cerrar Sesion</a>
             </div>
         </div>
     </div>
