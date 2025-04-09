@@ -1,9 +1,18 @@
+/* body
+{   colores para el final
+    background: #314755;
+    background: -webkit-linear-gradient(to left, #26a0da, #314755);
+    background: linear-gradient(to left, #26a0da, #314755);
+} */
 body
 {
-    background: #314755;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #26a0da, #314755);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #26a0da, #314755); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #403A3E;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #BE5869, #403A3E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
+
+
 
 .scrollable-table {
     height: 475px; /* Ajusta la altura según sea necesario */
