@@ -44,3 +44,7 @@ def status_404(error):
 
 def status_401(error):
     return render_template('admin/401.html'), 401
+
+@home.route('/test')
+def test():
+    return render_template('blog/test.html')
