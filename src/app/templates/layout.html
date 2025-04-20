@@ -28,16 +28,20 @@
             <a class="nav-link active" aria-current="page" href="{{ url_for('admin.home')}}">Operaciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('home.test')}}">Pruebas</a>
+            <a class="nav-link active" aria-current="page" href="{{ url_for('pruebas.test')}}">Pruebas</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-    <div class="container-fluid text-light">
-      <br>
-      {%block content%}
-      {%endblock%}
+  <br>
+    <div class="container-fluid text-light" data-bs-theme="dark">
+      <div class="row gx-5">
+        {%block content%}
+        {%endblock%}
+      </div>
     </div>
+    <!-- JavaScript de Bootstrap -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

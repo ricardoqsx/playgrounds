@@ -2,15 +2,12 @@
 
 {%block content%}
 
-<div class="row">
-
-    {% include "search_panel.html" %}
+    {% include "utils/search_panel.html" %}
 
     <!-- Tabla -->
-    <div class="col-md-9">
-        <div class="bg-dark py-4 px-4 text-bg-dark rounded-2 opacity-75">
+    <div class="col-md-8 mx-auto mt-3 mt-md-0 bg-dark py-4 px-4 text-bg-dark rounded-2 opacity-75">
             <h1 class="display-6 text-center">Seleccione articulo a editar...</h1>
-            <div class="scrollable-table table-responsive">
+            <div class="scrollable-table table-responsive px-2 px-md-0">
                 <table border="1" class="table table-striped table-dark table-hover">
                     <thead>
                         <tr>
@@ -23,17 +20,15 @@
                     <tbody class="text-left">
                         {% for row in frontblog %}
                             <tr>
-                                <td scope="row">{{ row[0] }}</td>
-                                <td scope="row"><a class="text-warning" href="{{ url_for('admin.edit_story', article_id=row[0]) }}">{{ row[1] }}</a></td>
-                                <td scope="row">{{ row[2] }}</td>
-                                <td scope="row">{{ row[3] }}</td>
+                                <td>{{ row[0] }}</td>
+                                <td><a class="text-warning" href="{{ url_for('admin.edit_story', article_id=row[0]) }}">{{ row[1] }}</a></td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>    
-</div>
-<br>
+    </div>
 {% endblock %}

@@ -2,17 +2,17 @@
 
 {% block content %}
 
+  <div class="col-md-10 mx-auto">
     <h1 class="display-4 m-5">{{ article[1]}}</h1>
     <p class="lead">{{ article[2] }}, {{ article[3] }}</p>
     <hr class="my-4">
     {{ md | safe }}
-    </div>
     <br>
-    <a class="btn btn-outline-primary btn-lg" href="{{url_for('home.index')}}" role="button">Regresar</a>
-    </div>
-
+    <br>
+    <a class="btn btn-outline-primary btn-lg text-center" 
+    href="{{url_for('home.index')}}" role="button">Regresar</a>
+  </div>
   <br>
-
   {% include "blog/comment.html" %}
 
 

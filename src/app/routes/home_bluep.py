@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, Blueprint
+from flask import render_template, request, Blueprint
 from math import ceil
 import markdown
 from app.models.queries_db import *
@@ -21,12 +21,8 @@ def index():
     articulos = posts(pagina, por_pagina)
     # md = markdown.markdown(articulos[2])
     
-    return render_template(
-        'index.html',
-        cons=articulos,
-        pagina_actual=pagina,
-        # md = md,
-        total_paginas=total_paginas)
+    return render_template('index.html',cons=articulos,
+        pagina_actual=pagina,total_paginas=total_paginas)
 
 # Ruta dinamica para visualizar articulos
 @home.route('/<int:article_id>')
@@ -35,16 +31,12 @@ def read_story(article_id):
     article = read_article(article_id)
     md = markdown.markdown(article[4], extensions=['tables', 'fenced_code'])
     if not article:
-        return render_template('blog/404.html'), 404
+        return render_template('utils/404.html'), 404
     # Se pasa el artículo a la plantilla con el nombre 'article'
     return render_template('blog/article.html', article=article, md=md)
 
 def status_404(error):
-    return render_template('admin/404.html'), 404
+    return render_template('utils/404.html'), 404
 
 def status_401(error):
-    return render_template('admin/401.html'), 401
-
-@home.route('/test')
-def test():
-    return render_template('blog/test.html')
+    return render_template('utils/401.html'), 401

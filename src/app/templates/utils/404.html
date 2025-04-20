@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="col">
+  <div class="bg-dark text-light p-5 box rounded-2 m-3 opacity-50">
+    <h1 class="display-4 text-danger">Error 404!!!</h1>
+    <h1 class="display-4 text-danger">El articulo no existe</h1>
+    <a class="btn btn-outline-primary btn-lg" 
+    href="{{url_for('home.index')}}" role="button">Regresar</a>
+  </div>
+</div>
+
+{% endblock %}

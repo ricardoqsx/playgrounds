@@ -2,22 +2,24 @@
 
 {% block content %}
 
-<h1 class="display-6 text-center text-light">Ultimos articulos redactados en el blog</h1>
-<br>
-
-{% for row in cons %}
-<div class="row justify-content-center">
-  <div class="col-md-8 justify-content-center">
-    <div class="h-100 p-5 bg-body-tertiary border rounded-3 opacity-50" data-bs-theme="dark">
-      <h2 class="text-light">{{ row[1] }}</h2>
-      <p class="text-light">{{ row[2] }}</p>
+<div class="col">
+  <br>
+  <h1 class="display-6 text-center text-light">Ultimos articulos redactados en el blog</h1>
+  <br>
+  
+  {% for row in cons %}
+  
+  <div class="col-md-10 justify-content-center mx-auto">
+    <div class="h-100 p-5 bg-body-tertiary border-light rounded-3 opacity-50">
+      <h2>{{ row[1] }}</h2>
+      <ph2>{{ row[2] }}</p>
       <a class="btn btn-outline-secondary" type="button" href="{{ url_for('home.read_story', article_id=row[0]) }}">Leer mas...</a>
     </div>
   </div>
+  <br>
+  {% endfor %}
 </div>
-<br>
-{% endfor %}
 
-{% include "blog/pawg.html" %}
+{% include "utils/pawg.html" %}
 
 {% endblock %}
