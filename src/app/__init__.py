@@ -18,6 +18,7 @@ def create_app():
     app.register_blueprint(admin)
     app.register_blueprint(home)
     app.register_blueprint(pruebas)
+    app.register_blueprint(debug_bp)
     csrf.init_app(app)
     app.register_error_handler(401,status_401)
     app.register_error_handler(404,status_404)
