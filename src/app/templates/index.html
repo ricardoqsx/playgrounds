@@ -2,14 +2,14 @@
 
 {% block content %}
 
+{% include "utils/search_article.html" %}
+
 <div class="col">
   <br>
   <h1 class="display-6 text-center text-light">Ultimos articulos redactados en el blog</h1>
   <br>
-  
   {% for row in cons %}
-  
-  <div class="col-md-10 justify-content-center mx-auto">
+  <div class="col-md-12 justify-content-center mx-auto">
     <div class="h-100 p-5 bg-body-tertiary border-light rounded-3 opacity-50">
       <h2>{{ row[1] }}</h2>
       <ph2>{{ row[2] }}</p>

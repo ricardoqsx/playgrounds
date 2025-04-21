@@ -2,13 +2,15 @@
 
 {%block content%}
 
-<br>
+<div class="text-success-emphasis text-center">
+    <h1>Agregar una Publicación</h1>
+    <br>
+</div>
 
 {% include "utils/opc_panel.html" %}
 
 <div class="col-md-8 mx-auto mt-3 mt-md-0 bg-dark text-light py-2 px-2 box rounded-2 opacity-75" data-bs-theme="dark">
-    <div class="card shadow p-2">
-        <h2 class="mb-2 text-success">Agregar un articulo...</h2>
+    <div class="card shadow p-2 text-success">
         <form action="{{ url_for('admin.insert') }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
             <div class="mb-2">
@@ -17,7 +19,7 @@
             </div>
             <div class="mb-2">
                 <label for="categoria" class="form-label">Categoría</label>
-                <select class="form-select" name="categoria">
+                <select class="form-select text-success" name="categoria">
                     <option selected disabled>Selecciona una categoría</option>
                     <option value="Tecnología">Tecnología</option>
                     <option value="Ciencia">Ciencia</option>

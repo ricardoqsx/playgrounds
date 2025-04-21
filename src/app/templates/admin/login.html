@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="form-box text-center">
+<div class="col-md-4 mx-auto form-box text-center">
   <div class="form-value" data-bs-theme="dark">
-    <main class="form-signin w-25 m-auto">
+    <main class="form-signin m-auto">
         <form action="{{ url_for('admin.login')}}" method="POST">
-          <img class="mb-4" src="{{ url_for('static',filename='img/docker.svg')}}" alt="" width="72" height="57">
+          <img class="mb-4" src="{{ url_for('static',filename='img/pinwheel.png')}}" alt="" width="76" height="72">
           <h1 class="h3 mb-3 fw-normal text-light">Iniciar Sesion</h1>
           <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
           {% with messages = get_flashed_messages() %}
@@ -24,12 +24,12 @@
       
           <div class="form-floating">
             <input type="text" class="form-control" name="username">
-            <label>Nombre de Usuario</label>
+            <label>Usuario</label>
           </div>
           <br>
           <div class="form-floating">
             <input type="password" class="form-control" name="password">
-            <label>Password</label>
+            <label>Contraseña</label>
           </div>
       
           <div class="form-check text-start my-3">

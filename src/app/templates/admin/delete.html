@@ -2,10 +2,14 @@
 
 {%block content%}
 
+<div class="text-danger-emphasis text-center">
+    <h1>Borrar Publicaciones</h1>
+    <br>
+</div>
+
 {% include "utils/search_panel.html" %}
 
-    <div class="col-md-8 mx-auto mt-3 mt-md-0 bg-dark py-4 px-4 text-bg-dark rounded-2 opacity-75">
-        <h1 class="display-6 text-center">Seleccione el/los articulos a borrar...</h1>
+    <div class="col-md-8 mx-auto mt-3 mt-md-0 bg-dark py-2 px-4 text-bg-dark rounded-2 opacity-75">
         <!-- tabla para mostrar los contactos -->
           <div class="scrollable-table table-responsive">
             <form method="POST" action="{{ url_for('admin.delete') }}"> <!-- Formulario para enviar los datos -->
@@ -33,8 +37,7 @@
                   </tbody>
               </table>
         </div>
-        <br>
-        <button type="submit" class="btn btn-danger col-md-5 text-center">Eliminar Articulos Seleccionados</button> <!-- Botón de envío -->
+        <button type="submit" class="btn btn-danger col-md-5 mx-auto d-block">Eliminar Articulos Seleccionados</button> <!-- Botón de envío -->
     </form>
     </div>
 {% endblock %}

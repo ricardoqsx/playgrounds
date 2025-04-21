@@ -11,6 +11,8 @@ services:
       - 8050:8050
     volumes:
       - ./src:/src
+    environment:
+      - TZ=America/Panama
     restart: unless-stopped
     networks:
       - playnet
