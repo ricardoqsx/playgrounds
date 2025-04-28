@@ -15,13 +15,14 @@ services:
       - TZ=America/Panama
     restart: unless-stopped
     networks:
-      - playnet
+      traefik-net:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.playgrounds.rule=Host(`playgrounds.mirai.local`)"
+      - "traefik.http.routers.playgrounds.entrypoints=web"
+      - "traefik.http.services.playgrounds.loadbalancer.server.port=8050"
 
 networks:
-  playnet:
-    name: playnet
-    driver: bridge
-    enable_ipv6: false
-    ipam:
-      config:
-        - subnet: 10.15.0.0/24
+  traefik-net:
+    external: true
+

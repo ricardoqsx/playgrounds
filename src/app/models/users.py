@@ -2,19 +2,7 @@ from werkzeug.security import check_password_hash #, generate_password_hash
 import sqlite3
 from flask_login import UserMixin
 
-class User(UserMixin):
-    def __init__(self, id, username, password, fullname="")-> None:
-        self.id=id
-        self.username=username
-        self.password=password
-        self.fullname=fullname
-
-    @classmethod
-    def check_password(self, hashed_password, password):
-        return check_password_hash(hashed_password, password)
-    
-# print(generate_password_hash("qwerty123"))
-
+# creacion de la bd e insercion de un usuario para pruebas
 users = 'user.db'
 def users_connect():
     return sqlite3.connect(users)
@@ -27,15 +15,39 @@ def create_users():
                        id integer primary key autoincrement,
                        username text,
                        password text,
-                       fullname text)''')
+                       fullname text,
+                       mail text,
+                       institution text,
+                       charge text)''')
         cursor.execute("select count(*) from user")
         result = cursor.fetchone()
-        if result == 0:
-            prova_user = ("insert into user(username, password, fullname) values (?, ?, ?)")
-            usr = "test"
+        if result[0] == 0:
+            prova_user = ("insert into user(username, password, fullname, mail, institution, charge) values (?, ?, ?, ?, ?, ?)")
+            usr = "admin"
             passwd = "scrypt:32768:8:1$hV1bmtqJ1iPnMPQe$32b7ec324c0800145b346c0b55ab8a1f1deb661cdf9d616c293c3011eec6ee7068b3ff8733ecc303c805ad8d6be194dbad622911af1b1a95ae2d1583b7286a63"
-            cursor.execute(prova_user,(usr, passwd, "Test User"))
+            fullnm = "Administrator"
+            ml = "jason_ing@live.com"
+            insti = "UTP"
+            chrg = "System Administrator"
+            cursor.execute(prova_user,(usr, passwd, fullnm, ml, insti, chrg))
+
+class User(UserMixin):
+    def __init__(self, id, username, password, fullname="", mail="", institution="", charge="") -> None:
+        self.id = id
+        self.username = username
+        self.password = password
+        self.fullname = fullname
+        self.mail = mail
+        self.institution = institution
+        self.charge = charge
+
+    @classmethod
+    def check_password(self, hashed_password, password):
+        return check_password_hash(hashed_password, password)
     
+# print(generate_password_hash("qwerty123"))
+
+# Model user es para verificar si un usuario existe    
 class ModelUser:
     @classmethod
     def login(cls, username, password):
