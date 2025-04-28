@@ -1,15 +1,12 @@
 <div class="col-md-4 mx-auto">
-    <br>
-    <br>
-    <br>
-    <br>
+    <br><br><br><br>
     <div class="py-4 px-4 mt-1 bg-dark box rounded-4 opacity-50">
-        <h1 class="display-6">Articulos del Blog</h1>
+        <h1 class="display-6">Categorias!</h1>
         <hr>
         <form role="search" method="GET" action="{{url_for('admin.home')}}">
             <fieldset>
-                <legend>Busqueda!</legend>
-                    <label for="TextInput" class="form-label">Escriba el titulo a buscar:</label>
+                <legend>Seleccione</legend>
+                    <label for="TextInput" class="form-label">Una Categoria:</label>
                     <input type="search" name="query" id="TextInput" class="form-control py-1 px-2 col-12 mb-2 text-center" placeholder="Titulo del Articulo">
                 <button type="submit" class="btn btn-outline-primary py-1 px-2 col-12 mb2">Buscar...</button>
             </fieldset>
