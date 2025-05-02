@@ -1,14 +1,19 @@
 from flask import render_template, request, redirect, url_for, Blueprint
 from app.models.admin_db import *
-from flask_login import login_required
+from flask_login import current_user
 
 create_blog()
 
 admin = Blueprint('admin',__name__, url_prefix='/admin')
 
+# Verificar autenticación antes de cada solicitud en este Blueprint
+@admin.before_request
+def check_authenticated():
+    if not current_user.is_authenticated:
+        return redirect(url_for('auth.login'))
+
 # ==== inicio ===
 @admin.route('/')
-@login_required
 def home():
     search_query = request.args.get('query', '') 
     if search_query:
@@ -19,7 +24,6 @@ def home():
 
 # Ruta dinamica para visualizar articulos
 @admin.route('/<int:article_id>')
-@login_required
 def view_story(article_id):
     # Obtenemos los datos del artículo
     article = get_article(article_id)
@@ -30,7 +34,6 @@ def view_story(article_id):
 
 # ==== editar articulos // listar articulos ===
 @admin.route('/insert', methods=['GET','POST'])
-@login_required
 def insert():
     if request.method == 'POST':
         # recibe datos del formulario
@@ -44,7 +47,6 @@ def insert():
 
 # ==== editar articulos // vista ampliada ===
 @admin.route('/edit')
-@login_required
 def edit():
     search_query = request.args.get('query', '') 
     if search_query:
@@ -55,7 +57,6 @@ def edit():
 
 # Ruta dinamica para editar articulos de manera individual
 @admin.route('/edit/<int:article_id>', methods=['GET','POST'])
-@login_required
 def edit_story(article_id):
     article = get_article(article_id)
     if not article:
@@ -72,7 +73,6 @@ def edit_story(article_id):
 
 # ==== borrar articulos ===
 @admin.route('/delete', methods=['GET','POST'])
-@login_required
 def delete():
     if request.method=='POST':
         ex=request.form.getlist('ext')

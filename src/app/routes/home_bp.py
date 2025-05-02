@@ -24,11 +24,9 @@ def index():
         # Funciones existentes
         total = total_articulos()
         articulos = posts(pagina, por_pagina)
-
     # Cálculo de páginas (igual que antes pero con el total correspondiente)
     total_paginas = ceil(total / por_pagina)
     pagina = max(1, min(pagina, total_paginas))
-
     return render_template(
         'index.html',
         cons=articulos,
@@ -41,8 +39,9 @@ def index():
 def read_story(article_id):
     # Obtenemos los datos del artículo
     article = read_article(article_id)
-    md = markdown.markdown(article[4], extensions=['tables', 'fenced_code'])
     if not article:
         return render_template('utils/404.html'), 404
+    historia = article[4] if article[4] else ""
+    md = markdown.markdown(historia, extensions=['tables', 'fenced_code'])
     # Se pasa el artículo a la plantilla con el nombre 'article'
     return render_template('blog/article.html', article=article, md=md)
