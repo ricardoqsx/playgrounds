@@ -2,19 +2,19 @@
   <ul class="pagination justify-content-center opacity-50">
       <!-- Botón Anterior -->
       <li class="page-item {% if pagina_actual == 1 %}disabled{% endif %}">
-          <a class="page-link" href="?page={{ pagina_actual - 1 }}">Anterior</a>
+          <a class="page-link" href="?page={{ pagina_actual - 1 }}{% if search_term %}&q={{ search_term|urlencode }}{% endif %}">Anterior</a>
       </li>
 
       <!-- Números de página -->
       {% for num in range(1, total_paginas + 1) %}
           <li class="page-item {% if num == pagina_actual %}active{% endif %}">
-              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              <a class="page-link" href="?page={{ num }}{% if search_term %}&q={{ search_term|urlencode }}{% endif %}">{{ num }}</a>
           </li>
       {% endfor %}
 
       <!-- Botón Siguiente -->
       <li class="page-item {% if pagina_actual == total_paginas %}disabled{% endif %}">
-          <a class="page-link" href="?page={{ pagina_actual + 1 }}">Siguiente</a>
+          <a class="page-link" href="?page={{ pagina_actual + 1 }}{% if search_term %}&q={{ search_term|urlencode }}{% endif %}">Siguiente</a>
       </li>
   </ul>
 </nav>

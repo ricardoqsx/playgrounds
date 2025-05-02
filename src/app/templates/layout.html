@@ -21,20 +21,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('admin.login')}}">Acceso</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('auth.login')}}">Acceso</a></li>
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('pruebas.test')}}">Pruebas</a></li>
+          {% if current_user.is_authenticated %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Operaciones</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ url_for('admin.home')}}">Articulos</a></li>
-              <li><a class="dropdown-item" href="#">Usuarios</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('users.inicio')}}">Usuarios</a></li>
               <li><a class="dropdown-item" href="#">Comentarios</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{{url_for('admin.logout')}}">Cerrar Sesion</a></li>
+              <li><a class="dropdown-item" href="{{url_for('auth.logout')}}">Cerrar Sesion</a></li>
             </ul>
           </li>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Titulo de Articulo..." aria-label="Search">
+          {% endif %}
+          <form class="d-flex" role="search" method="GET" action="{{ url_for('home.index') }}">
+            <input class="form-control me-2" name="q" type="search" value="{{ search_term or '' }}" placeholder="Titulo de Articulo..." aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>
         </ul>

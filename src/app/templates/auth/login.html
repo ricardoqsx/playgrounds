@@ -4,7 +4,7 @@
 <div class="col-md-4 mx-auto form-box text-center">
   <div class="form-value" data-bs-theme="dark">
     <main class="form-signin m-auto">
-        <form action="{{ url_for('admin.login')}}" method="POST">
+        <form action="{{ url_for('auth.login')}}" method="POST">
           <img class="mb-4" src="{{ url_for('static',filename='img/pinwheel.png')}}" alt="" width="76" height="72">
           <h1 class="h3 mb-3 fw-normal text-light">Iniciar Sesion</h1>
           <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
@@ -13,7 +13,7 @@
           {% if messages %}
           <br>
           {% for message in messages %}
-          <div class="alert alert-primary alert-dismissible" role="alert">
+          <div class="alert alert-danger alert-dismissible" role="alert">
             <strong>{{ message }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>

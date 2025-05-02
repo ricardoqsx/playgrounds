@@ -1,36 +1,10 @@
-from flask import render_template, request, redirect, url_for, Blueprint, flash
+from flask import render_template, request, redirect, url_for, Blueprint
 from app.models.admin_db import *
-from app.models.users import *
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_required
 
 create_blog()
-create_users()
 
 admin = Blueprint('admin',__name__, url_prefix='/admin')
-
-@admin.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        username = request.form.get('username', '').strip()
-        password = request.form.get('password', '').strip()
-        if not username or not password:
-            flash("Completa todos los campos")
-            return render_template('admin/login.html')
-        
-        # Buscar usuario en BD
-        logged_user = ModelUser.login(username, password)
-        if logged_user:
-            login_user(logged_user)
-            return redirect(url_for('admin.home'))
-        else:
-            flash("Usuario o contraseña incorrectos")
-            return render_template('admin/login.html')
-    return render_template('admin/login.html')
-    
-@admin.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('admin.login'))
 
 # ==== inicio ===
 @admin.route('/')
