@@ -1,0 +1,45 @@
+{%extends "layout.html"%}
+
+{%block content%}
+
+<div class="text-danger-emphasis text-center">
+    <h1>Borrar Usuarios</h1>
+    <br>
+</div>
+
+    <div class="col-md-8 mx-auto mt-3 mt-md-0 bg-dark py-2 px-4 text-bg-dark rounded-2 opacity-75">
+        <!-- tabla para mostrar los contactos -->
+          <div class="scrollable-table table-responsive px-2 px-md-0">
+            <form method="POST" action="{{ url_for('users.delete') }}"> <!-- Formulario para enviar los datos -->
+                <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
+              <table border="1" class="table table-striped table-dark table-hover text-center">
+                  <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre Usuario</th>
+                        <th>Nombre Completo</th>
+                        <th>Correo</th>
+                        <th>Institucion</th>
+                        <th>Cargo</th>
+                        <th>Fecha de Creacion</th>
+                      </tr>
+                  </thead>
+                  <tbody style="text-align:left">
+                      {% for row in frontquery %}
+                          <tr>
+                            <td><input class="form-check-input" type="checkbox" name="ext" value="{{ row[0] }}"></td> <!-- Checkbox -->
+                              <td>{{ row[1] }}</td>
+                              <td>{{ row[2] }}</td>
+                              <td>{{ row[3] }}</td>
+                              <td>{{ row[4] }}</td>
+                              <td>{{ row[5] }}</td>
+                              <td>{{ row[6] }}</td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+        </div>
+        <button type="submit" class="btn btn-danger col-md-5 mx-auto d-block">Eliminar Usuarios Seleccionados</button> <!-- Botón de envío -->
+    </form>
+    </div>
+{% endblock %}

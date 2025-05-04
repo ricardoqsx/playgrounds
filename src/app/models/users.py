@@ -74,23 +74,27 @@ class ModelUser:
             if result:
                 return User(result[0], result[1], result[2], result[3])
             return None
-        
+
+#  esta es para ver el listado total de usuarios, omitiendo la contraseña        
 def view_users():
     with users_connect() as connect:
         cursor = connect.cursor()
-        cursor.execute("select username, fullname, mail, institution, charge, creation from user")
+        cursor.execute("select id, username, fullname, mail, institution, charge, creation from user")
         return cursor.fetchall()
 
+# verificar si un usuario o correos ya existen en la BD
 def user_exists(uname, mail):
     with users_connect() as connect:
         cursor = connect.cursor()
         cursor.execute("SELECT 1 FROM user WHERE username = ? OR mail = ?", (uname, mail))
         return cursor.fetchone() is not None                 
 
+# verificar si el correo es valido
 def is_valid_email(email):
     pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
     return re.match(pattern, email) is not None
 
+# validar si la contraseña es fuerte
 def is_strong_password(password):
     # Mínimo 8 caracteres, al menos 1 mayúscula, 1 número, y 1 especial
     if len(password) < 8:
@@ -103,53 +107,18 @@ def is_strong_password(password):
         return False
     return True
 
-def insert_user(uname, passwd, fname, mail, insti, charge):
-    # Validaciones secuenciales con mensajes específicos
-    if user_exists(uname, mail):
-        raise ValueError("El nombre de usuario o correo electrónico ya está registrado")
+def insert_user(uname, passwd,fname,mail,insti,charge):
+    with users_connect() as connect:
+        cursor = connect.cursor()
+        hash_passwd = generate_password_hash(passwd)
+        cursor.execute('''
+            INSERT INTO user 
+            (username, password, fullname, mail, institution, charge)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (uname, hash_passwd, fname, mail, insti, charge))
     
-    if not is_valid_email(mail):
-        raise ValueError("Formato de correo electrónico inválido")
-    
-    if not is_strong_password(passwd):
-        raise ValueError(
-            "La contraseña debe contener:\n"
-            "- Mínimo 8 caracteres\n"
-            "- Al menos una mayúscula\n"
-            "- Al menos un número\n"
-            "- Al menos un carácter especial"
-        )
-    
-    try:
-        with users_connect() as connect:
-            cursor = connect.cursor()
-            hash_passwd = generate_password_hash(passwd)
-            
-            # Validación adicional del hash
-            if not hash_passwd:
-                raise RuntimeError("Error al generar el hash de la contraseña")
-            
-            cursor.execute('''
-                INSERT INTO user 
-                (username, password, fullname, mail, institution, charge)
-                VALUES (?, ?, ?, ?, ?, ?)
-            ''', (uname, hash_passwd, fname, mail, insti, charge))
-            
-            # Verificación de inserción exitosa
-            if cursor.rowcount != 1:
-                raise RuntimeError("No se pudo crear el usuario")
-            
-            return True  # Indicador de éxito
-            
-    except sqlite3.IntegrityError as e:
-        # Captura violaciones de UNIQUE que podrían ocurrir por race conditions
-        connect.rollback()
-        raise ValueError("El usuario o correo ya existe (error de base de datos)") from e
-        
-    except sqlite3.Error as e:
-        connect.rollback()
-        raise RuntimeError(f"Error de base de datos: {str(e)}") from e
-        
-    except Exception as e:
-        connect.rollback()
-        raise RuntimeError(f"Error inesperado: {str(e)}") from e
+def delete_user(ex):
+    with users_connect() as con:
+        cur = con.cursor()
+        for ext in ex:
+            cur.execute("delete from user where id = ?", (ext,))

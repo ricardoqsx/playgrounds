@@ -35,10 +35,12 @@
             </ul>
           </li>
           {% endif %}
+          {% if request.endpoint == 'home.index' %}
           <form class="d-flex" role="search" method="GET" action="{{ url_for('home.index') }}">
             <input class="form-control me-2" name="q" type="search" value="{{ search_term or '' }}" placeholder="Titulo de Articulo..." aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
           </form>
+          {% endif %}
         </ul>
       </div>
     </div>
