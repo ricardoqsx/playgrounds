@@ -82,6 +82,13 @@ def view_users():
         cursor.execute("select id, username, fullname, mail, institution, charge, creation from user")
         return cursor.fetchall()
 
+def edit_users(user_id):
+    with users_connect() as connect:
+        cursor = connect.cursor()
+        cursor.execute("select id, username, fullname, mail, institution, charge, creation from user where id = ?", (user_id,))
+        userid= cursor.fetchone()
+        return userid
+
 # verificar si un usuario o correos ya existen en la BD
 def user_exists(uname, mail):
     with users_connect() as connect:
