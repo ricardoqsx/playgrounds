@@ -80,7 +80,7 @@ def delete():
         return redirect(url_for('admin.delete'))
     search_query = request.args.get('query','')
     if search_query:
-        frontquery=search_blog(get_article)
+        frontquery=search_blog(search_query)
     else:
         frontquery=blogquery()
     return render_template('admin/delete.html', frontquery=frontquery)

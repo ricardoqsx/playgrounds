@@ -4,7 +4,7 @@
 {% if request.endpoint != 'admin.insert' and request.endpoint != 'admin.edit_story' %}
         <h1 class="display-6">Articulos del Blog</h1>
         <hr>
-        <form role="search" method="GET" action="{{url_for('admin.home')}}">
+        <form role="search" method="GET" action="{{url_for(request.endpoint, **request.view_args)}}">
             <fieldset>
                 <legend>Busqueda!</legend>
                     <label for="TextInput" class="form-label">Escriba el titulo a buscar:</label>
