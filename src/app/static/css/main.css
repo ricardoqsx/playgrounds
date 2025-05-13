@@ -19,3 +19,36 @@ body
     margin-top: 16px;
     
 }
+
+/* Para navegadores WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+/* Para Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 100, 100, 0.3) transparent;
+}
+
+/* Efecto de desvanecimiento */
+body {
+  overflow-y: overlay; /* Solo para WebKit */
+  transition: scrollbar-color 0.3s; /* Para Firefox */
+}
+
+/* Opcional: Ocultar al inicio y mostrar al pasar mouse */
+body:not(:hover)::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
