@@ -1,26 +1,41 @@
+{% if request.blueprint == 'admin' %}
 <div class="col-md-4 mx-auto">
     <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75">
+{% if request.endpoint != 'admin.insert' and request.endpoint != 'admin.edit_story' %}
         <h1 class="display-6">Articulos del Blog</h1>
         <hr>
         <form role="search" method="GET" action="{{url_for('admin.home')}}">
             <fieldset>
                 <legend>Busqueda!</legend>
                     <label for="TextInput" class="form-label">Escriba el titulo a buscar:</label>
-                    <input type="search" name="query" id="TextInput" class="form-control py-1 px-2 col-12 mb-2 text-center" placeholder="Titulo del Articulo">
-                <button type="submit" class="btn btn-outline-primary py-1 px-2 col-12 mb2">Buscar...</button>
+                    <input type="search" name="query" id="TextInput" class="form-control py-1 px-2 col-8 mx-auto mb-2 text-center" placeholder="Titulo del Articulo">
+                <button type="submit" class="btn btn-outline-primary py-1 px-2 col-8 mx-auto d-block mb2">Buscar...</button>
             </fieldset>
         </form>
         <hr>
+{% endif %}
         <div>
             <h4 class="display-8 text-center">Panel de Administracion</h4>
             <div class="py-2 px-2 mt-1 box rounded-2 opacity-75">
-                <a type="button" class="btn btn-outline-info py-1 px-2 col-12 mb-2" href="{{url_for('admin.home')}}">Inicio</a>
-                <a type="button" class="btn btn-outline-success py-1 px-2 col-12 mb-2" href="{{url_for('admin.insert')}}">Crear Articulo</a>
-                <a type="button" class="btn btn-outline-warning py-1 px-2 col-12 mb-2" href="{{url_for('admin.edit')}}">Actualizar Articulo</a>
-                <a type="button" class="btn btn-outline-danger py-1 px-2 col-12 mb-2" href="{{url_for('admin.delete')}}">Borrar Articulo</a>
-                <a type="button" class="btn btn-outline-light py-1 px-2 col-12 mb-2" href="{{url_for('auth.logout')}}">Cerrar Sesion</a>
+                <a type="button" class="btn btn-outline-info py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('admin.home')}}">Inicio</a>
+                <a type="button" class="btn btn-outline-success py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('admin.insert')}}">Crear Articulo</a>
+                <a type="button" class="btn btn-outline-warning py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('admin.edit')}}">Actualizar Articulo</a>
+                <a type="button" class="btn btn-outline-danger py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('admin.delete')}}">Borrar Articulo</a>
+                <a type="button" class="btn btn-outline-light py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('auth.logout')}}">Cerrar Sesion</a>
             </div>
         </div>
     </div>
 </div>
+{% else %}
 
+<div class="col-md-4 mx-auto">
+    <div class="bg-dark py-2 px-2 mt-1 box rounded-2 opacity-75">
+        <h1 class="display-6 text-center">Administracion de Usuarios</h1>
+        <hr>
+        <a type="button" class="btn btn-outline-info py-2 px-2 col-8 mx-auto d-block mb-3" href="{{url_for('users.inicio')}}">Inicio</a>
+        <a type="button" class="btn btn-outline-success py-2 px-2 col-8 mx-auto d-block mb-3" href="{{url_for('auth.register')}}">Crear Usuario</a>
+        <a type="button" class="btn btn-outline-danger py-2 px-2 col-8 mx-auto d-block mb-3" href="{{url_for('users.delete')}}">Borrar Usuario</a>
+        <a type="button" class="btn btn-outline-light py-2 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('auth.logout')}}">Cerrar Sesion</a>
+    </div>
+</div>
+{% endif %}
