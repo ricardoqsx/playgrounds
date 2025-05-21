@@ -6,7 +6,7 @@
     <main class="form-signin m-auto">
         <form action="{{ url_for('auth.register') }}" method="POST">
           <img class="mb-4" src="{{ url_for('static',filename='img/pinwheel.png')}}" alt="" width="76" height="72">
-          <h1 class="h3 mb-3 fw-normal text-light">Registro de Usuario</h1>
+          <h1 class="h3 mb-3 fw-normal">Registro de Usuario</h1>
           <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
           
           {% with messages = get_flashed_messages(with_categories=true) %}
@@ -57,7 +57,7 @@
           </div>
           <br>
           
-          <div class="password-requirements text-start mb-3 text-light">
+          <div class="password-requirements text-start mb-3">
             <small>La contraseña debe contener:</small>
             <ul class="list-unstyled">
               <li>• Mínimo 8 caracteres</li>
