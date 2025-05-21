@@ -15,7 +15,7 @@ services:
       - TZ=America/Panama
     restart: unless-stopped
     networks:
-      traefik-net:
+      - traefik-net
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.playgrounds.rule=Host(`playgrounds.mirai.local`)"
