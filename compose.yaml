@@ -16,13 +16,30 @@ services:
     restart: unless-stopped
     networks:
       - traefik-net
+      - playnet
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.playgrounds.rule=Host(`playgrounds.mirai.local`)"
       - "traefik.http.routers.playgrounds.entrypoints=web"
       - "traefik.http.services.playgrounds.loadbalancer.server.port=8050"
 
+  playdb:
+    container_name: playdb
+    image: mariadb:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    env_file: .env
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    networks:
+      - playnet
+
 networks:
   traefik-net:
     external: true
 
+  playnet:
+    driver: bridge
+    internal: true

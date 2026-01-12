@@ -1,5 +1,8 @@
 flask
 flask-login
 flask-WTF
+Flask-SQLAlchemy
+PyMySQL
+SQLAlchemy
 pandas
 markdown
