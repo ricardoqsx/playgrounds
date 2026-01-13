@@ -3,12 +3,14 @@ import os
 from app.routes import *  # Importar TODOS los blueprint
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
-from app.models.queries_mdb import init_db
+from app.models.admin_mdb import init_db
 
 def create_app():
     app = Flask(__name__)
     login_manager_app = LoginManager(app)
     init_db(app) # <- inicializando con SQLAlchemy
+    with app.app_context():
+        create_blog()
 
     @login_manager_app.user_loader
     def load_user(id):
