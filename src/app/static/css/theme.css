@@ -181,6 +181,20 @@ body.cms-skin::before {
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.42), transparent 78%);
 }
 
+body.cms-skin:has(.cms-bg-panel.show)::after {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  pointer-events: none;
+  content: "";
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(4px) saturate(115%);
+}
+
+html[data-theme="light"] body.cms-skin:has(.cms-bg-panel.show)::after {
+  background: rgba(255, 255, 255, 0.16);
+}
+
 body.cms-skin > nav,
 body.cms-skin > .container {
   position: relative;
@@ -396,9 +410,12 @@ html[data-theme="light"] .cms-skin .btn-outline-light:focus-visible {
 }
 
 .cms-skin .cms-bg-panel {
+  position: relative;
   width: 360px;
   padding: 14px;
   z-index: 1070;
+  background: var(--cms-bg-panel-strong) !important;
+  backdrop-filter: blur(22px) saturate(150%);
 }
 
 .cms-theme-grid {
