@@ -1,30 +1,26 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 import re
-import sqlite3
 from flask_login import UserMixin
+from app.models.db import get_conn
 
-# creacion de la bd e insercion de un usuario para pruebas
-users = 'user.db'
-def users_connect():
-    return sqlite3.connect(users)
 
 def create_users():
-    with users_connect() as connect:
+    with get_conn() as connect:
         cursor = connect.cursor()
         cursor.execute('''
-            create table if not exists user(
-                       id integer primary key autoincrement,
-                       creation timestamp default (datetime('now', 'localtime')),
-                       username text not null unique,
-                       password text not null,
-                       fullname text not null,
-                       mail text not null unique,
-                       institution text,
-                       charge text)''')
-        cursor.execute("select count(*) from user")
+            create table if not exists `user`(
+                       id INT AUTO_INCREMENT PRIMARY KEY,
+                       creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       username VARCHAR(100) NOT NULL UNIQUE,
+                       password VARCHAR(255) NOT NULL,
+                       fullname VARCHAR(150) NOT NULL,
+                       mail VARCHAR(255) NOT NULL UNIQUE,
+                       institution VARCHAR(150),
+                       charge VARCHAR(150))''')
+        cursor.execute("select count(*) from `user`")
         result = cursor.fetchone()
         if result[0] == 0:
-            prova_user = ("insert into user(username, password, fullname, mail, institution, charge) values (?, ?, ?, ?, ?, ?)")
+            prova_user = ("insert into `user`(username, password, fullname, mail, institution, charge) values (%s, %s, %s, %s, %s, %s)")
             usr = "admin"
             passwd = generate_password_hash("qwerty123")
             fullnm = "Administrator"
@@ -51,10 +47,10 @@ class User(UserMixin):
 class ModelUser:
     @classmethod
     def login(cls, username, password):
-        with users_connect() as conn:
+        with get_conn() as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "SELECT id, username, password, fullname FROM user WHERE username = ?",
+                "SELECT id, username, password, fullname FROM `user` WHERE username = %s",
                 (username,)
             )
             user_data = cursor.fetchone()
@@ -66,9 +62,9 @@ class ModelUser:
    
     @classmethod
     def get_by_id(self, id):
-        with users_connect() as connect:
+        with get_conn() as connect:
             cursor = connect.cursor()
-            sql = "SELECT id, username, password, fullname FROM user WHERE id = ?"
+            sql = "SELECT id, username, password, fullname FROM `user` WHERE id = %s"
             cursor.execute(sql, (int(id),))  # Convertir a entero
             result = cursor.fetchone()
             if result:
@@ -77,23 +73,23 @@ class ModelUser:
 
 #  esta es para ver el listado total de usuarios, omitiendo la contraseña        
 def view_users():
-    with users_connect() as connect:
+    with get_conn() as connect:
         cursor = connect.cursor()
-        cursor.execute("select id, username, fullname, mail, institution, charge, creation from user")
+        cursor.execute("select id, username, fullname, mail, institution, charge, creation from `user`")
         return cursor.fetchall()
 
 def edit_users(user_id):
-    with users_connect() as connect:
+    with get_conn() as connect:
         cursor = connect.cursor()
-        cursor.execute("select id, username, fullname, mail, institution, charge, creation from user where id = ?", (user_id,))
+        cursor.execute("select id, username, fullname, mail, institution, charge, creation from `user` where id = %s", (user_id,))
         userid= cursor.fetchone()
         return userid
 
 # verificar si un usuario o correos ya existen en la BD
 def user_exists(uname, mail):
-    with users_connect() as connect:
+    with get_conn() as connect:
         cursor = connect.cursor()
-        cursor.execute("SELECT 1 FROM user WHERE username = ? OR mail = ?", (uname, mail))
+        cursor.execute("SELECT 1 FROM `user` WHERE username = %s OR mail = %s", (uname, mail))
         return cursor.fetchone() is not None                 
 
 # verificar si el correo es valido
@@ -115,17 +111,17 @@ def is_strong_password(password):
     return True
 
 def insert_user(uname, passwd,fname,mail,insti,charge):
-    with users_connect() as connect:
+    with get_conn() as connect:
         cursor = connect.cursor()
         hash_passwd = generate_password_hash(passwd)
         cursor.execute('''
-            INSERT INTO user 
+            INSERT INTO `user` 
             (username, password, fullname, mail, institution, charge)
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s, %s, %s)
         ''', (uname, hash_passwd, fname, mail, insti, charge))
     
 def delete_user(ex):
-    with users_connect() as con:
+    with get_conn() as con:
         cur = con.cursor()
         for ext in ex:
-            cur.execute("delete from user where id = ?", (ext,))
+            cur.execute("delete from `user` where id = %s", (ext,))

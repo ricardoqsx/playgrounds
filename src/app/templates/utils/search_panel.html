@@ -9,13 +9,13 @@
                 <legend>Busqueda!</legend>
                     <label for="TextInput" class="form-label">Escriba el titulo a buscar:</label>
                     <input type="search" name="query" id="TextInput" class="form-control py-1 px-2 col-8 mx-auto mb-2 text-center" placeholder="Titulo del Articulo">
-                <button type="submit" class="btn btn-outline-primary py-1 px-2 col-8 mx-auto d-block mb2">Buscar...</button>
+                <button type="submit" class="btn btn-outline-primary py-1 px-2 col-8 mx-auto d-block mb-2">Buscar...</button>
             </fieldset>
         </form>
         <hr>
 {% endif %}
         <div>
-            <h4 class="display-8 text-center">Panel de Administracion</h4>
+            <h4 class="fs-5 text-center">Panel de Administracion</h4>
             <div class="py-2 px-2 mt-1 box rounded-2 opacity-75">
                 <a type="button" class="btn btn-outline-info py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('admin.home')}}">Inicio</a>
                 <a type="button" class="btn btn-outline-success py-1 px-2 col-8 mx-auto d-block mb-2" href="{{url_for('admin.insert')}}">Crear Articulo</a>

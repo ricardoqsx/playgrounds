@@ -1,22 +1,18 @@
 import os
-import sqlite3
 import pandas as pd
+from app.models.db import get_conn
 
-blog = 'blog.db'
-
-def get_conn():
-    return sqlite3.connect(blog)
 
 def create_blog():
     with get_conn() as con:
         cur = con.cursor()
         cur.execute('''
-            create table if not exists blog(
-                    id integer primary key autoincrement,
-                    titulo text not null,
-                    categoria text not null,
-                    autor text not null,
-                    historia text not null)''')
+            CREATE TABLE IF NOT EXISTS blog(
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    titulo VARCHAR(255) NOT NULL,
+                    categoria VARCHAR(100) NOT NULL,
+                    autor VARCHAR(150) NOT NULL,
+                    historia LONGTEXT NOT NULL)''')
         cur.execute("select count(*) from blog")
         res=cur.fetchone()
         if res is not None:
@@ -24,8 +20,8 @@ def create_blog():
                 current_dir = os.path.dirname(__file__)
                 csv_path = os.path.join(current_dir, "blog.csv")
                 df = pd.read_csv(csv_path)
-                columns_to_insert = ['id','titulo','categoria','autor','historia']
-                df.to_sql('blog', con, if_exists='append', index=False)
+                insert_data = "insert into blog (id, titulo, categoria, autor, historia) values (%s, %s, %s, %s, %s)"
+                cur.executemany(insert_data, df[['id', 'titulo', 'categoria', 'autor', 'historia']].values.tolist())
 
 # Consulta basica par mostrar la tabla
 def blogquery():
@@ -39,7 +35,7 @@ def blogquery():
 def search_blog(val):
     with get_conn() as con:
         cur = con.cursor()
-        cur.execute("select * from blog where titulo like ?",('%'+val+'%',))
+        cur.execute("select * from blog where titulo like %s",('%'+val+'%',))
         total = cur.fetchall()
     return total
 
@@ -47,7 +43,7 @@ def search_blog(val):
 def get_article(article_id):
     with get_conn() as con:
         cur = con.cursor()
-        cur.execute("SELECT id, titulo, categoria, autor, historia FROM blog WHERE id = ?", (article_id,))
+        cur.execute("SELECT id, titulo, categoria, autor, historia FROM blog WHERE id = %s", (article_id,))
         article = cur.fetchone()
     return article
 
@@ -55,7 +51,7 @@ def get_article(article_id):
 def create_article(ex,us,ma,ph):
     with get_conn() as con:
         cur = con.cursor()
-        inser_data= "insert into blog (titulo, categoria, autor, historia) values (?, ?, ?, ?)"
+        inser_data= "insert into blog (titulo, categoria, autor, historia) values (%s, %s, %s, %s)"
         cur.execute(inser_data,(ex, us, ma, ph))
 
 # Consulta para editar articulos
@@ -63,11 +59,11 @@ def update_article(ids, titulo, categ, aut, stor):
     with get_conn() as con:
         cur = con.cursor()
         upd = ''' update blog 
-                    set titulo =?, 
-                    categoria = ?, 
-                    autor = ?,
-                    historia = ?
-                  where id = ?
+                    set titulo = %s, 
+                    categoria = %s, 
+                    autor = %s,
+                    historia = %s
+                  where id = %s
               '''
         cur.execute(upd,(titulo, categ, aut, stor, ids))
 
@@ -76,4 +72,4 @@ def delete_article(ex):
     with get_conn() as con:
         cur = con.cursor()
         for ext in ex:
-            cur.execute("delete from blog where id = ?", (ext,))
+            cur.execute("delete from blog where id = %s", (ext,))

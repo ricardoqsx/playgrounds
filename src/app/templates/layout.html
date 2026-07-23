@@ -1,19 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="{{ url_for('static',filename='img/star.png')}}" type="image/png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Playgrounds</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("playgrounds-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.setAttribute("data-theme", theme);
+          } else {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+          var bg = localStorage.getItem("playgrounds-bg-theme");
+          if (bg && bg !== "base") {
+            document.documentElement.setAttribute("data-cms-bg-theme", bg);
+          }
+        } catch (error) {}
+      })();
+    </script>
     <!-- Bootstrap 5x-->
     <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
     
     <!-- Custom CSS-->
     <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/theme.css')}}">
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top" data-bs-theme="dark">
+<body class="cms-skin" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Python WebApp</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +38,43 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown cms-bg-menu">
+            <button class="nav-link dropdown-toggle cms-bg-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Apariencia
+            </button>
+            <div class="dropdown-menu dropdown-menu-end cms-bg-panel" aria-label="Selector de fondos">
+              <p class="cms-bg-panel-title">Tema</p>
+              <div class="cms-theme-grid" role="group" aria-label="Selector de tema">
+                <button class="cms-theme-option" type="button" data-cms-theme="dark">Oscuro</button>
+                <button class="cms-theme-option" type="button" data-cms-theme="light">Claro</button>
+              </div>
+              <p class="cms-bg-panel-title">Fondos</p>
+              <div class="cms-bg-grid">
+                <button class="cms-bg-swatch cms-bg-swatch-base" type="button" data-cms-bg-theme="base" aria-label="Fondo base"><span>Base</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-teal" type="button" data-cms-bg-theme="teal" aria-label="Fondo teal"><span>Teal</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-blue" type="button" data-cms-bg-theme="blue" aria-label="Fondo azul"><span>Blue</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-violet" type="button" data-cms-bg-theme="violet" aria-label="Fondo violeta"><span>Violet</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-amber" type="button" data-cms-bg-theme="amber" aria-label="Fondo ambar"><span>Amber</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-multi" type="button" data-cms-bg-theme="multi" aria-label="Fondo multicolor"><span>Multi</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-aqua" type="button" data-cms-bg-theme="aqua" aria-label="Fondo aqua"><span>Aqua</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-spectrum" type="button" data-cms-bg-theme="spectrum" aria-label="Fondo spectrum"><span>Spectrum</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-slate" type="button" data-cms-bg-theme="slate" aria-label="Fondo slate"><span>Slate</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-copper" type="button" data-cms-bg-theme="copper" aria-label="Fondo cobre"><span>Copper</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-sky" type="button" data-cms-bg-theme="sky" aria-label="Fondo cielo"><span>Sky</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-purple" type="button" data-cms-bg-theme="purple" aria-label="Fondo purpura"><span>Purple</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-rose" type="button" data-cms-bg-theme="rose" aria-label="Fondo rosa"><span>Rose</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-lime" type="button" data-cms-bg-theme="lime" aria-label="Fondo lima"><span>Lime</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-indigo" type="button" data-cms-bg-theme="indigo" aria-label="Fondo indigo"><span>Indigo</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-crimson" type="button" data-cms-bg-theme="crimson" aria-label="Fondo crimson"><span>Crimson</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-ember" type="button" data-cms-bg-theme="ember" aria-label="Fondo brasas"><span>Ember</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-sunset" type="button" data-cms-bg-theme="sunset" aria-label="Fondo atardecer"><span>Sunset</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-gold" type="button" data-cms-bg-theme="gold" aria-label="Fondo dorado"><span>Gold</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-honey" type="button" data-cms-bg-theme="honey" aria-label="Fondo miel"><span>Honey</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-volcano" type="button" data-cms-bg-theme="volcano" aria-label="Fondo volcan"><span>Volcano</span></button>
+                <button class="cms-bg-swatch cms-bg-swatch-coral" type="button" data-cms-bg-theme="coral" aria-label="Fondo coral"><span>Coral</span></button>
+              </div>
+            </div>
+          </li>
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('auth.login')}}">Acceso</a></li>
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('pruebas.test')}}">Pruebas</a></li>
           {% if current_user.is_authenticated %}
@@ -46,7 +100,7 @@
     </div>
   </nav>
   <br>
-    <div class="container text-light" data-bs-theme="dark">
+    <div class="container text-light">
       <div class="row justify-content-center  ">
         {%block content%}
         {%endblock%}
@@ -54,5 +108,6 @@
     </div>
     <!-- JavaScript de Bootstrap -->
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/themeAppearance.js') }}"></script>
 </body>
 </html>

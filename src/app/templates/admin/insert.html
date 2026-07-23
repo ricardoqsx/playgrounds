@@ -16,11 +16,11 @@
             <input type="hidden" name="csrf_token" value="{{csrf_token() }}">
             <div class="mb-2">
                 <label for="titulo" class="form-label">Título</label>
-                <input type="text" class="form-control" name="titulo" placeholder="Escribe el título aquí">
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Escribe el título aquí">
             </div>
             <div class="mb-2">
                 <label for="categoria" class="form-label">Categoría</label>
-                <select class="form-select text-success" name="categoria">
+                <select class="form-select text-success" id="categoria" name="categoria">
                     <option selected disabled>Selecciona una categoría</option>
                     <option value="Tecnología">Tecnología</option>
                     <option value="Ciencia">Ciencia</option>
@@ -30,11 +30,11 @@
             </div>
             <div class="mb-2">
                 <label for="autor" class="form-label">Autor</label>
-                <input type="text" class="form-control" name="autor" placeholder="Nombre del autor">
+                <input type="text" class="form-control" id="autor" name="autor" placeholder="Nombre del autor">
             </div>
             <div class="mb-2">
                 <label for="contenido" class="form-label">Contenido</label>
-                <textarea class="form-control" name="contenido" rows="5" placeholder="Escribe el contenido aquí (máx. 500 palabras)"></textarea>
+                <textarea class="form-control" id="contenido" name="contenido" rows="5" placeholder="Escribe el contenido aquí (máx. 500 palabras)"></textarea>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Agregar</button>

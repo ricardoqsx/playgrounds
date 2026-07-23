@@ -4,19 +4,40 @@ import logging
 
 debug_bp = Blueprint('debug_bp', __name__)
 
+SENSITIVE_HEADERS = {'authorization', 'cookie', 'set-cookie', 'x-csrftoken', 'x-csrf-token'}
+SENSITIVE_FIELDS = {'password', 'passwd', 'csrf_token', 'token', 'secret'}
+
+
+def sanitize_headers(headers):
+    return {
+        key: '[redacted]' if key.lower() in SENSITIVE_HEADERS else value
+        for key, value in headers.items()
+    }
+
+
+def sanitize_payload(payload):
+    if isinstance(payload, dict):
+        return {
+            key: '[redacted]' if key.lower() in SENSITIVE_FIELDS else sanitize_payload(value)
+            for key, value in payload.items()
+        }
+    if isinstance(payload, list):
+        return [sanitize_payload(item) for item in payload]
+    return payload
+
 def log_request_info():
-    current_app.logger.debug("Cabeceras de solicitud: %s", request.headers)
+    current_app.logger.debug("Cabeceras de solicitud: %s", sanitize_headers(request.headers))
     content_type = request.headers.get('Content-Type', '').lower()
     
     if request.content_length and request.content_length > 1024:
         current_app.logger.debug("Cuerpo de solicitud: [demasiado grande]")
     elif 'application/json' in content_type:
-        current_app.logger.debug("Cuerpo de solicitud (JSON): %s", request.get_json())
+        current_app.logger.debug("Cuerpo de solicitud (JSON): %s", sanitize_payload(request.get_json()))
     else:
         current_app.logger.debug("Cuerpo de solicitud: [omitido]")
 
 def log_response_info(response):
-    current_app.logger.debug("Cabeceras de respuesta: %s", response.headers)
+    current_app.logger.debug("Cabeceras de respuesta: %s", sanitize_headers(response.headers))
     content_type = response.headers.get('Content-Type', '').lower()
     
     if 'text/html' in content_type:
