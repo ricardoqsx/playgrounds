@@ -3,6 +3,7 @@ import os
 from app.routes import *  # Importar TODOS los blueprint
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
+from app.models.debug_db import create_request_logs
 
 def create_app():
     app = Flask(__name__)
@@ -14,6 +15,7 @@ def create_app():
     
     csrf = CSRFProtect()
     app.secret_key = os.environ.get('SECRET_KEY', os.urandom(24))
+    create_request_logs()
     # Configuraciones (BD, blueprints, etc.)
     app.register_blueprint(auth)
     app.register_blueprint(admin)
@@ -25,4 +27,3 @@ def create_app():
     app.register_error_handler(401,status_401)
     app.register_error_handler(404,status_404)
     return app
-

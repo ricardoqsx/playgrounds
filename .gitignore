@@ -174,3 +174,5 @@ cython_debug/
 *.db
 .DS_Store
 .vscode/
+.env_app
+.env_db

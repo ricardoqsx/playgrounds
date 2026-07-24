@@ -4,3 +4,4 @@ flask-WTF
 pandas
 markdown
 PyMySQL
+SQLAlchemy

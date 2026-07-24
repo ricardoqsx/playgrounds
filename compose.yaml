@@ -2,14 +2,10 @@ services:
   mariadb:
     image: mariadb:11
     container_name: playgrounds-db
-    environment:
-      - MARIADB_DATABASE=playgrounds
-      - MARIADB_USER=playgrounds
-      - MARIADB_PASSWORD=playgrounds
-      - MARIADB_ROOT_PASSWORD=playgrounds-root
-      - TZ=America/Panama
+    env_file:
+      - .env_db
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 10s
@@ -34,13 +30,8 @@ services:
       - 8050:8050
     volumes:
       - ./src:/src
-    environment:
-      - TZ=America/Panama
-      - DB_HOST=mariadb
-      - DB_PORT=3306
-      - DB_NAME=playgrounds
-      - DB_USER=playgrounds
-      - DB_PASSWORD=playgrounds
+    env_file:
+      - .env_app
     restart: unless-stopped
     networks:
       - traefik-net
